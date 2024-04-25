@@ -28,6 +28,7 @@ abstract class Controller extends BaseController
      */
     public function register(Request $request)
     {
+
         // Inicia la transaccion //
         DB::beginTransaction();
 
@@ -36,7 +37,7 @@ abstract class Controller extends BaseController
             $validados = $request->validate([
                 'nick' => ['required', 'min:2', 'max:20'],
                 'email' => ['required', 'max:50'],
-                'password' => ['required', 'min:8', 'max:20', 'confirmed'],
+                'password' => ['required'],
                 'rol' => ['required'],
             ]);
 
@@ -54,7 +55,7 @@ abstract class Controller extends BaseController
             // Guarda la información en la bd //
             DB::commit();
 
-            return response()->json(['message' => 'Usuario registrado correctamente'], 200);
+            return response()->json([$request]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Ha ocurrido un error al registrar el usuario: ' . $e->getMessage()], 500);
