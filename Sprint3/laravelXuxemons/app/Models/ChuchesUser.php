@@ -9,6 +9,7 @@ class ChuchesUser extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'chuche_id';
     protected $fillable = [
         'chuche_id',
         'user_id',

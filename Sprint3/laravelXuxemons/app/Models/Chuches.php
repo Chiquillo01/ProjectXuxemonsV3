@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Chuches extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'nombre',
         'dinero',
