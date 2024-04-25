@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chuches_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('chuche_id');
-            $table->unsignedBigInteger('user_id');
+            $table->char('user_id', 6);
             $table->unsignedBigInteger('stack');
             $table->timestamps();
 
