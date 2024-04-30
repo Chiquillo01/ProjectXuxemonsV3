@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('chuche_id');
             $table->char('user_id', 6);
-            $table->unsignedBigInteger('stack');
+            $table->integer('stack');
             $table->timestamps();
 
             // Definir las claves foráneas
