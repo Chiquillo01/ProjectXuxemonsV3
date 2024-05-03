@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('chuche_maximas', 3)->default(10);
             $table->boolean('debug')->default(true);
-            $table->char('id_users', 6);
+            $table->unsignedBigInteger('id_users');
             $table->date('date_debug');
             $table->timestamps();
 

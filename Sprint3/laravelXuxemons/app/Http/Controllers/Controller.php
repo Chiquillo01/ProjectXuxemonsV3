@@ -12,6 +12,7 @@ use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Mockery\Exception;
 
 class Controller extends BaseController
@@ -40,11 +41,14 @@ class Controller extends BaseController
                 'rol' => ['required'],
             ]);
 
-            // Codificar el valor del rol al estar trabajando con 0/1 //
+            // Codificar el valor del rol y id para que corresponda con el caracter que espera en la db //
+            $id_User = Str::random(6);
             $rolStatus = $request->input('rol') ? true : false;
+
 
             // Crea el usuario //
             $user = new User();
+            $user->idUser = $id_User;
             $user->nick = $request->input('nick');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
