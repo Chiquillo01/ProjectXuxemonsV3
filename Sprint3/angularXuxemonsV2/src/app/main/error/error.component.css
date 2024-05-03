@@ -1,0 +1,17 @@
+.error-container {
+    background-color: rgb(162, 255, 255);
+    border: 5px solid rgb(255, 133, 249);
+    border-inline: 0 solid rgba(170, 69, 165, 0);
+    padding: 1em 0;
+    margin-top: 10em;
+    text-align: center;
+}
+
+.error-title {
+    font-size: bold;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    font-size: bold;
+}

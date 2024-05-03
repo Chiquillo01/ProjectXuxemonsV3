@@ -1,0 +1,45 @@
+<body>
+    <div class="container">
+        <div class="first-section">
+            <div class="antidotos">
+                <h3>Antidotos</h3>
+                <hr>
+            </div>
+            <div class="botons" *ngIf="horario[0]?.debug == undefined || horario[0]?.debug">
+                <button (click)="debug()">
+                    Debug
+                </button>
+            </div>
+        </div>
+
+        <div class="first-section">
+            <div class="list-container">
+                <div>
+                    <h3>Lista de Chuches</h3>
+                    <hr>
+                </div>
+
+                <div class="card-flex" *ngFor="let chuche of chucheUser">
+                    <div class="stackZone" *ngIf="chuche.stack > 1">
+                        <h2 class="card-title">
+                            {{chuche.stack}}
+                        </h2>
+                    </div>
+                    <h2 class="card-title">
+                        {{chuche.nombre}}
+                    </h2>
+                    <div class="imgFormat">
+                        <img [src]="'../../../../assets/home/chuches/' + chuche.archivo" alt="{{ chuche.nombre }}">
+                    </div>
+
+                    <h4 class="card-title">
+                        {{chuche.dinero}}<p>coins</p>
+                    </h4>
+                    <h4 class="card-title">
+                        {{chuche.modificador}}<p>xp</p>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

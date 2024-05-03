@@ -1,0 +1,20 @@
+<body>
+    <form [formGroup]="xuxemonForm" (ngSubmit)="crearXuxemon()">
+        <h2>Crear Xuxemon</h2>
+        <input formControlName="nombre" type="text" placeholder="Nombre"><br>
+
+        <select formControlName="tipo">
+            <option value="Tierra">Tierra</option>
+            <option value="Aire">Aire</option>
+            <option value="Agua">Agua</option>
+        </select>
+
+        <input formControlName="archivo" type="text" placeholder="Nombre del archivo"><br>
+
+        <button class="boton" type="submit" [disabled]="!xuxemonForm.valid">Crear</button>
+        <a href="/xuxedex">
+            <img class="atras" src="../../../../../assets/home/atras.png" alt="">
+        </a>
+
+    </form>
+</body>

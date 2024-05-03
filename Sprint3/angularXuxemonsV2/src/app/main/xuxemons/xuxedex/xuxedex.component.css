@@ -1,0 +1,88 @@
+.adminButons {
+    display: flex;
+    justify-content: right;
+    margin: 1em 0;
+}
+
+.adminButons button {
+    background-color: #10567e;
+    color: #ffffff;
+    border: 2px solid #45b0ee;
+    border-radius: 10px;
+    font-size: 20px;
+    font-style: oblique;
+    width: auto;
+    height: 60px;
+}
+
+.adminButons button:hover {
+    background-color: #21799c;
+    border: 2px solid rgb(255, 133, 249);
+}
+
+.list-container {
+    background: linear-gradient(to top, #95baff, #cce6ff);
+    border: 2px solid rgb(255, 133, 249);
+    border-radius: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.card-flex {
+    background-image: url("./../../../../assets/home/marcos/bronce.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: white;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    min-width: 200px;
+    min-height: 250px;
+}
+
+.card-title {
+    padding-top: 20px;
+}
+
+.imgFormat {
+    padding-top: 13px;
+    min-height: 170px;
+}
+
+img{
+    width: 150px;
+}
+
+.type_img {
+    width: 45px;
+    height: 45px;
+}
+
+.btn {
+    color: rgb(255, 255, 255);
+    border: none;
+    text-align: center;
+    padding-top: 40px;
+    font-size: 18px;
+    width: 50%;
+    height: auto;
+}
+
+.editar-btn {
+    padding-left: 40px;
+}
+
+.eliminar-btn {
+    padding-right: 20px;
+}
+
+.editar-btn:hover {
+    color: rgb(100, 100, 255);
+    font-size: 18px;
+}
+
+.eliminar-btn:hover {
+    color: rgb(255, 80, 80);
+    font-size: 18px;
+}

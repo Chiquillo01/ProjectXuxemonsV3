@@ -1,0 +1,51 @@
+form {
+    background-color: rgb(173, 173, 173);
+    border: 2px solid rgb(255, 133, 249);
+    border-radius: 10px;
+    margin: 4em auto;
+    padding: 20px;
+    min-width: 200px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+input[type="text"],
+select {
+    border: 2px solid rgb(219, 156, 255);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 12px 0;
+    padding: 8px;
+    width: 100%;
+}
+
+input:hover, select:hover {
+    border: 2px solid rgb(255, 133, 249);
+}
+
+.boton {
+    border: 2px solid rgb(241, 255, 118);
+    color: #333;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #87cefa;
+    cursor: pointer;
+}
+
+a {
+    margin-left: 40%;
+}
+
+.atras {
+    height: 40px;
+    width: 40px;
+}
