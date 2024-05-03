@@ -1,0 +1,33 @@
+<body>
+    <div class="list-container">
+        <div class="card-flex" *ngFor="let cardUser of xuxemonsUser">
+            <div class="card-header">
+
+                <h3 class="card-title">
+                    {{cardUser.nombre}}
+                </h3>
+            </div>
+
+
+            <div class="imgFormat" *ngIf="cardUser.enfermo">
+                <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
+                    [ngStyle]="getImageStyle(cardUser.tamano)">
+            </div>
+
+            <div class="card-header">
+                <h4 class="card-title-type">
+                    Tipo: <img class="type_img" src="../../../assets/home/otros/{{cardUser.tipo}}.png"
+                        alt="{{cardUser.tipo}}">
+                    <!-- {{cardUser.tipo}} -->
+                </h4>
+            </div>
+
+            <div>
+                <button class="alimentar-btn-fav" (click)="curar()">
+                    curar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</body>

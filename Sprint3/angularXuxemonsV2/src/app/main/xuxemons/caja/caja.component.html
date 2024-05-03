@@ -1,0 +1,124 @@
+<body>
+    <div class="container">
+        <div class="first-section">
+            <div class="favoritos">
+                <div class="title-style"></div>
+                <div class="card-flex" *ngFor="let cardUser of xuxemonsUserActivos"></div>
+            </div>
+            <div class="botons">
+                <button (click)="debug()">
+                    Debug
+                </button>
+            </div>
+        </div>
+
+        <div class="list-container">
+
+        </div>
+    </div>
+</body>
+
+<!-- 
+   
+        
+            
+                
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            {{cardUser.nombre}}
+                        </h4>
+                    </div>
+
+                    <div class="imgFormat">
+                        <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
+                            [ngStyle]="getImageStyle(cardUser.tamano)">
+                    </div>
+
+                    <div class="card-header">
+                        <h5>
+                            Tipo: <img class="type_img" src="../../../assets/home/otros/{{cardUser.tipo}}.png"
+                                alt="{{cardUser.tipo}}">
+                        </h5>
+                        <a>
+                            <img class="button_upload" src="../../../../assets/xuxemons/iconos/upload1.png" alt=""
+                                onmouseover="this.src='../../../../assets/xuxemons/iconos/upload.gif';"
+                                onmouseout="this.src='../../../assets/xuxemons/iconos/upload1.png'"
+                                (click)="activo(cardUser)">
+                        </a>
+                    </div>
+
+                    <div class="card-header">
+                        <div *ngIf="cardUser.favorito == 0 && !cardUser.enfermo">
+                            <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
+                                Alimentar
+                            </button>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="botons">
+                <button (click)="debug()">
+                    Debug
+                </button>
+            </div>
+        </div>
+
+        
+            <div class="card-flex" *ngFor="let cardUser of xuxemonsUser">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        {{cardUser.nombre}}
+                    </h4>
+
+                    <a (click)="favorito(cardUser)" *ngIf="cardUser.favorito == 0">
+                        <img class="button_slide" alt="estrellita"
+                            onmouseout="this.src='../../../assets/xuxemons/iconos/star1.png'"
+                            onmouseover="this.src='../../../assets/xuxemons/iconos/star3.png';"
+                            src="../../../assets/xuxemons/iconos/star1.png"
+                            onclick="this.src='../../../assets/xuxemons/iconos/star2.png';">
+                    </a>
+                    <a (click)="favorito(cardUser)" *ngIf="cardUser.favorito == 1">
+                        <img class="button_slide" alt="estrellita"
+                            onmouseout="this.src='../../../assets/xuxemons/iconos/star3.png'"
+                            onmouseover="this.src='../../../assets/xuxemons/iconos/star1.png';"
+                            src="../../../assets/xuxemons/iconos/star3.png">
+                    </a>
+                </div>
+
+                <div class="imgFormat" *ngIf="!cardUser.enfermo">
+                    <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
+                        [ngStyle]="getImageStyle(cardUser.tamano)">
+                </div>
+                <div class="imgFormat" *ngIf="cardUser.enfermo">
+                    <img src="../../../../assets/xuxemons/enfermo.png" alt="enfermo"
+                        [ngStyle]="getImageStyle(cardUser.tamano)">
+                </div>
+
+                <div class="card-header">
+                    <h5>
+                        Tipo: <img class="type_img" src="../../../assets/home/otros/{{cardUser.tipo}}.png"
+                            alt="{{cardUser.tipo}}">
+                    </h5>
+                    <a>
+                        <img class="button_upload" src="../../../../assets/xuxemons/iconos/upload1.png" alt=""
+                            onmouseover="this.src='../../../../assets/xuxemons/iconos/upload.gif';"
+                            onmouseout="this.src='../../../assets/xuxemons/iconos/upload1.png'"
+                            (click)="activo(cardUser)">
+                    </a>
+                </div>
+
+                <div class="card-header">
+                    <div *ngIf="cardUser.favorito == 0 && !cardUser.enfermo">
+                        <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
+                            Alimentar
+                        </button>
+
+                        <button class="btn eliminar-btn" (click)="eliminar(cardUser.xuxemon_id)">
+                            Liberar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body> -->
