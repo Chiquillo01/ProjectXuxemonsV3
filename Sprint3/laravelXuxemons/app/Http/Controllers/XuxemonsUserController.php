@@ -60,7 +60,7 @@ class XuxemonsUserController extends Controller
 
             $nuevoXuxemonUsuario->save();
 
-            return response()->json(['message' => 'Nuevo Xuxemon creado con éxito'], 200);
+            return response()->json([$userToken, $user], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al crear el nuevo Xuxemon: ' . $e->getMessage()], 500);
         }

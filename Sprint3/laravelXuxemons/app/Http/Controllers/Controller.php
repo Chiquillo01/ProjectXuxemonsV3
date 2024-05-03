@@ -42,12 +42,13 @@ class Controller extends BaseController
             ]);
 
             // Codificar el valor del rol y id para que corresponda con el caracter que espera en la db //
+            $id_User = Str::random(6);
             $rolStatus = $request->input('rol') ? true : false;
-            $id = Str::random(6);
+
 
             // Crea el usuario //
             $user = new User();
-            $user->id = $id;
+            $user->idUser = $id_User;
             $user->nick = $request->input('nick');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));

@@ -16,11 +16,11 @@ class XuxemonsSeed extends Seeder
             'Apleki', 'Avecrem', 'Beeboo', 'Boo-hoot', 'Cabrales', 'Catua',
             'Catyuska', 'Chapapá', 'Chopper', 'Deskangoo', 'Doflamingo', 'Dolly', 
             'Elconchudo', 'Eldientes', 'Flipper',  'Floppi', 'Horseluis', 'Krokolisko', 
-            'Kurama', 'Ladybug', 'Lengualargui', 'Medusation', 'Meekmeek', 'Megalo', 
+            'Kurama', 'Ladybug', 'Lengualargui', 'Trompi', 'Meekmeek', 'Megalo', 
             'Mocha', 'Murcimurci', 'Nemo', 'Oinkcelot', 'Oreo', 'Otto', 
             'Pinchimott', 'Tux', 'Posón', 'Quakko', 'Ron', 'Sesssi', 
             'Shelly', 'Sirucco', 'Torcas', 'Trompeta', 'Elgominas',
-            'Rajoy', 'Rawlion', 'Cuellilargui', 'Bambino', 'Rexxo', 'Trompi', 'Pollis',
+            'Rajoy', 'Rawlion', 'Cuellilargui', 'Bambino', 'Rexxo', 'Medusation', 'Pollis',
         ];
 
 
@@ -28,11 +28,11 @@ class XuxemonsSeed extends Seeder
             'Tierra', 'Aire', 'Aire', 'Aire', 'Tierra', 'Aire',
             'Aire', 'Agua', 'Tierra', 'Tierra', 'Aire', 'Tierra',
             'Agua', 'Agua', 'Agua', 'Tierra',  'Agua', 'Agua',
-            'Tierra', 'Aire', 'Tierra', 'Agua', 'Tierra', 'Agua',
+            'Tierra', 'Aire', 'Tierra', 'Tierra', 'Tierra', 'Agua',
             'Agua', 'Aire', 'Agua', 'Tierra', 'Tierra', 'Tierra',
             'Agua', 'Agua', 'Aire', 'Agua',  'Tierra', 'Tierra', 
             'Agua', 'Aire', 'Agua', 'Aire', 'Tierra', 'Aire', 
-            'Tierra', 'Tierra', 'Tierra', 'Tierra', 'Tierra', 'Aire',
+            'Tierra', 'Tierra', 'Tierra', 'Tierra', 'Agua', 'Aire',
         ];
 
         for ($i = 0; $i < count($nombres); $i++) {

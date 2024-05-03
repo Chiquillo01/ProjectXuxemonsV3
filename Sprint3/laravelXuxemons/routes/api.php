@@ -11,12 +11,18 @@ use App\Http\Controllers\ChuchesUserController;
 // Rutas para los Xuxemons //
 // Creación de Xuxemons //
 Route::post('/xuxemons', [XuxemonsController::class, 'crearXuxemon']);
+Route::post('/xuxemons/pc/random', [XuxemonsUserController::class, 'debug']);
+// Mostrar todos los xuxemons , xuxemons del usuario y sus favoritos //
+Route::get('/xuxemons', [XuxemonsController::class, 'show']);
+Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show']);
+// Actualización de Xuxemon //
+Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'update']);
+// Eliminar un xuxemon //
+Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 // Actualizar configuraciones del administrador //
 Route::put('/xuxemons/tamano', [XuxemonsController::class, 'updateTam']);
 Route::put('/xuxemons/evos', [XuxemonsController::class, 'updateEvo1']);
 Route::put('/xuxemons/evos2', [XuxemonsController::class, 'updateEvo2']);
-// Eliminar un xuxemon //
-Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 // ---------------------- //
 // ---------------------- //
 
@@ -37,9 +43,8 @@ Route::post('/login', [Controller::class, 'login']);
 
 
 
-Route::post('/xuxemons/pc/random', [XuxemonsUserController::class, 'debug']);
-// Actualización de Xuxemon //
-Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'update']);
+
+
 Route::post('/xuxemons/activo', [XuxemonsUserController::class, 'updateActivo']);
 Route::post('/xuxemons/favorito', [XuxemonsUserController::class, 'updateFav']);
 // Actualizar tamaño para la evolución por defecto ( uso del administrador) //
@@ -50,10 +55,7 @@ Route::put('/xuxemons/evolucionar2', [XuxemonsUserController::class, 'evoluciona
 Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimentar']);
 // Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimentar']);
 
-// Mostrar todos los xuxemons //
-Route::get('/xuxemons', [XuxemonsController::class, 'show']);
-// Mostrar todos los xuxemons del usuario //
-Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show']);
+
 // Mostrar todos los xuxemons del usuario //
 Route::get('/xuxemonsUserActivos/{userId}', [XuxemonsUserController::class, 'showActivos']);
 // ---------------------- //
