@@ -156,6 +156,69 @@ export class XuxemonsService {
     );
   }
 
+  /* --- Alimentación --- */
+  /* -------------------- */
+  /**
+  * Nombre: alimentar
+  * Función: Función para actualizar el nivel evolutivo por defecto del juego
+  * @returns Un observable que emite la respuesta de la solicitud HTTP.
+  */
+  alimentar(xuxemon_id: number, chuche_id: number): Observable<any> {
+    const userToken = this.tokenService.getToken();
+    const authToken = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    return this.http.put(
+      `http://127.0.0.1:8000/api/xuxemons/${xuxemon_id}/alimentar/${chuche_id}/user/${userToken}`,
+      {},
+      {
+        headers,
+      }
+    );
+  }
+
+  /**
+   * Nombre: evolucionarXuxemon
+   * Función: uncion para enviar los datos necesarios para saber si el xuxemon 
+   * es capaz de evolucionar
+   * @returns Un observable que emite la respuesta de la solicitud HTTP.
+   */
+  evolucionarXuxemon(xuxemonId: number, cumpleEvo1: boolean): Observable<any> {
+    const userToken = this.tokenService.getToken();
+    const body = {
+      userToken: userToken,
+      xuxemonId: xuxemonId,
+      cumpleEvo1: cumpleEvo1
+    };
+
+    return this.http.put(
+      'http://127.0.0.1:8000/api/xuxemons/evolucionar', body
+    );
+  }
+
+  /**
+   * Nombre: evolucionarXuxemon2
+   * Función: uncion para enviar los datos necesarios para saber si el xuxemon 
+   * es capaz de evolucionar por segunda vez
+   * @returns Un observable que emite la respuesta de la solicitud HTTP.
+   */
+  evolucionarXuxemon2(xuxemonId: number, cumpleEvo2: boolean): Observable<any> {
+    const userToken = this.tokenService.getRole();
+    const authToken = this.tokenService.getToken();
+    const body = {
+      userToken: userToken,
+      authToken: authToken,
+      xuxemonId: xuxemonId,
+      cumpleEvo2: cumpleEvo2
+    };
+
+    return this.http.put(
+      'http://127.0.0.1:8000/api/xuxemons/evolucionar2', body
+    );
+  }
+
   /* --- Configuraciones del admin --- */
   /* --------------------------------- */
   /**

@@ -1,10 +1,34 @@
+p {
+    background-color: #d9cfde;
+    border-radius: 20px 0 0 20px;
+    border: 2px solid #ffff;
+    border-right: none;
+    margin: 5em 0;
+    max-height: 55px;
+    min-width: 50px;
+}
+
+.atras {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.flexContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 0 auto;
+    width: 70%;
+}
+
 form {
-    background-color: #e6e6e6;
-    border: 1px solid pink;
-    border-radius: 10px;
-    margin: 6em auto 0 auto;
+    background-color: #d9cfde;
+    border: 2px solid #ffff;
+    border-radius: 0 10px 10px 10px;
     padding: 20px;
-    min-width: 400px;
+    margin: 5em 0;
 }
 
 h2 {
@@ -22,26 +46,18 @@ select {
 }
 
 .boton {
-    background-color: #add8e6;
-    color: #333;
+    background-color: pink;
+    color: #000000;
+    border-color: #ffff;
     border-radius: 4px;
     display: inline-block;
     margin-top: 14px;
     padding: 10px 20px;
-    text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
 .boton:hover {
-    background-color: #87cefa;
+    background-color: #FEF0D6;
+    border-color: pink;
     cursor: pointer;
-}
-
-a {
-    margin-left: 50%;
-}
-
-.atras {
-    height: 40px;
-    width: 40px;
 }

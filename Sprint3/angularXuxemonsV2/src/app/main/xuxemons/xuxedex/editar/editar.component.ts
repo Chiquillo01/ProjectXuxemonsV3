@@ -20,14 +20,16 @@ export class EditarComponent {
         nombre: params['nombre'],
         tipo: params['tipo'],
         archivo: params['archivo'],
+        categoria: params['categoria'],
       };
     });
-
+    
     // Seteamos los valores //
     this.xuxemonForm.setValue({
       nombre: this.xuxeData.nombre || '',
       tipo: this.xuxeData.tipo || '',
       archivo: this.xuxeData.archivo || '',
+      categoria: this.xuxeData.categoria || '',
     });
   }
 
@@ -42,6 +44,7 @@ export class EditarComponent {
       nombre: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
       archivo: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
     });
   }
 

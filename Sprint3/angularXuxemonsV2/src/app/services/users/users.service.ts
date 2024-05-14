@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { TokenService } from '../token/token.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+
   constructor(
     private http: HttpClient,
-    public tokenService: TokenService) { }
+    public tokenService: TokenService,
+    private router: Router) { }
 
 
   /**
@@ -27,5 +30,16 @@ export class UsersService {
    */
   Registrar(user: any): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/register', user);
+  }
+
+  isUserAdmin(): boolean {
+    const role = localStorage.getItem('userRole') || 'default';
+
+    if (role == 'default') {
+      this.router.navigateByUrl('/landingPage');
+      return false;
+    } else {
+      return true;
+    }
   }
 }

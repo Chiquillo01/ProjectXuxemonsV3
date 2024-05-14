@@ -5,6 +5,7 @@ export interface XuxemonsUsers {
     tipo: string;
     archivo: string;
     tamano: string;
+    categoria: string;
     evo1: number;
     evo2: number;
     activo: number;

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre', 20);
             $table->string('tipo', 50);
             $table->string('archivo');
+            $table->string('categoria', 15)->default('normal');
             $table->string('tamano')->default('pequeno');
             $table->integer('evo1')->nullable()->default(3);
             $table->integer('evo2')->nullable()->default(5);

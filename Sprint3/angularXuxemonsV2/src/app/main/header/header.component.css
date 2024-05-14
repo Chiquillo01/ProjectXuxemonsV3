@@ -1,9 +1,7 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
-
+/* Header */
 header {
-    background-color: rgb(30, 30, 30);
-    border-color: rgb(255, 133, 249);
-    border-style: none none solid none;
+    background-color: #d9cfde;
+    border-bottom: 2px solid #ffff;
     padding: 10px 0;
 }
 
@@ -15,46 +13,39 @@ header {
 }
 
 .logo {
-    border: 1px solid rgb(255, 133, 249);
+    border: 2px solid #ffff;
+    border-radius: 40%;
     margin-left: 4px;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
 }
 
-a {
-    color: black;
-    text-decoration: none;
-}
-
-.imgHeader {
-    background: pink;
-    border-radius: 10px;
-    border: 2px solid pink;
-    padding: 8px;
-    margin-right: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.imgHeaderAdmin {
-    background: rgb(241, 255, 118);
-    border-radius: 10px;
-    border: 2px solid rgb(241, 255, 118);
-    padding: 8px;
-    margin-right: 5px;
-    margin-left: 30px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.imgHeader:hover,
-.imgHeaderAdmin:hover {
+.logo:hover {
     border: 2px solid rgb(133, 255, 255);
 }
 
+.imgHeader {
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    margin-right: 1em;
+}
+
+.imgHeaderAdmin {
+    margin-right: 0.8em;
+    margin-top: 10px;
+    height: 30px;
+    width: 30px;
+}
+
 .button_slide {
+    margin-right: 1em;
     width: 50px;
     height: 50px;
+}
+
+.button_slide:hover {
+    cursor: pointer;
 }
 
 .icons {

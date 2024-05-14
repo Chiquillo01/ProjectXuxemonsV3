@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LandingComponent } from './landing/landing.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
-    //canActivate: const [AngularGuard]
+    canActivate: [authGuard]
   },
   {
     path: '**',

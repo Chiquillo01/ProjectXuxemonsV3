@@ -1,27 +1,42 @@
 <body>
     <div class="container">
         <!-- Solo para usuario administrador -->
-        <div class="adminButons" *ngIf="userRole === 1">
-            <button (click)="crear()">
+        <div class="adminButons">
+            <div class="pagination">
+                <a (click)="prevPage()" [class.disabled]="currentPage === 1">
+                    <img class="flechitas f1" src="./../../../../assets/home/Xuxemons/flechitas.png" alt="Atras">
+                </a>
+                <span class="paginasXuxemons">Página {{currentPage}}</span>
+                <a (click)="nextPage()" [class.disabled]="getCurrentPageXuxemons().length < this.itemsPerPage">
+                    <img class="flechitas" src="./../../../../assets/home/Xuxemons/flechitas.png" alt="Siguiente">
+                </a>
+            </div>
+
+            <select class="select-css" [(ngModel)]="categoria">
+                <option value="">Categoria</option>
+                <option *ngFor="let categoria of conseguirCategorias()" [value]="categoria">{{categoria}}</option>
+            </select>
+
+            <a (click)="crear()" *ngIf="userRole === 1" class="crearB">
                 Crear Xuxemons
-            </button>
+            </a>
         </div>
         <!-- //////////////////////////////////////// -->
 
         <div class="list-container">
-            <div class="card-flex" *ngFor="let card of xuxemons">
+            <div class="card-flex" *ngFor="let card of getCurrentPageXuxemons()" [ngStyle]="getStyle(card.tipo)">
                 <h3 class="card-title">
                     {{card.nombre}}
                 </h3>
 
+                <h4 class="card-title" [ngStyle]="getTipeStyle(card.tipo)">
+                    {{card.tipo}}
+                </h4>
+
                 <div class="imgFormat">
                     <img [src]="'../assets/xuxemons/' + card.archivo" [attr.alt]="card.nombre">
                 </div>
-
-                <h4 class="card-title">
-                    Tipo: <img class="type_img" src="../../../assets/home/otros/{{card.tipo}}.png" alt="{{card.tipo}}">
-                </h4>
-
+                
                 <!-- Solo para usaruio administrador -->
                 <div *ngIf="userRole === 1">
                     <button class="btn editar-btn" (click)="editar(card)">

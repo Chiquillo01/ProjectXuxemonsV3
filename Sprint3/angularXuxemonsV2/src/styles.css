@@ -1,8 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background-color: rgb(65, 65, 65);
+    background-color: #E7E4F1;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     font-family: sans-serif;
+}
+
+button,
+h4, h2,
+label, .paginasXuxemons, .adminButons, .generarB, h3,
+.imgHeader,
+.homeText {
+    font-family: 'Gay';
+    letter-spacing: 2px;
+}
+
+p, .card-title, .btn,
+li,
+::placeholder {
+    font-family: 'SuperCreamy';
+    letter-spacing: 1px;
+}
+
+
+
+@font-face {
+    font-family: 'SuperCreamy';
+    src: url('./assets/fonts/Use.ttf');
+}
+
+@font-face {
+    font-family: 'Pok';
+    src: url('./assets/fonts/Pokemon Solid.ttf');
+}
+
+@font-face {
+    font-family: 'Gay';
+    src: url('./assets/fonts/KINKEE__.TTF');
+}
+
+@font-face {
+    font-family: 'Valen';
+    src: url('./assets/fonts/Valentine Cute.ttf');
 }

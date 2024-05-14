@@ -23,6 +23,7 @@ class XuxemonsController extends Controller
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
                 'archivo' => 'required|string',
+                'categoria' => 'required|string',
             ]);
 
             DB::transaction(function () use ($validados) {
@@ -73,6 +74,7 @@ class XuxemonsController extends Controller
                 'xuxemonNewDate.nombre' => ['required', 'max:20', 'unique:xuxemons,nombre,' . $id_Xuxemon],
                 'xuxemonNewDate.tipo' => ['required', 'in:Tierra,Aire,Agua'],
                 'xuxemonNewDate.archivo' => ['required', 'unique:xuxemons,archivo,' . $id_Xuxemon],
+                'xuxemonNewDate.categoria' => ['required', 'in:normal,legendario' . $id_Xuxemon],
             ]);
 
             // Hace el update dentro de una transaccion
@@ -85,6 +87,7 @@ class XuxemonsController extends Controller
                     'nombre' => $validados['xuxemonNewDate']['nombre'],
                     'tipo' => $validados['xuxemonNewDate']['tipo'],
                     'archivo' => $validados['xuxemonNewDate']['archivo'],
+                    'categoria' => $validados['xuxemonNewDate']['categoria'],
                 ]);
             });
 

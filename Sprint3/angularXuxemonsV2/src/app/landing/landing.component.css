@@ -1,8 +1,7 @@
 /* Header */
 header {
-    background-color: rgb(30, 30, 30);
-    border-color: rgb(255, 133, 249);
-    border-style: none none solid none;
+    background-color: #d9cfde;
+    border-bottom: 2px solid #ffff;
     padding: 10px 0;
 }
 
@@ -14,29 +13,29 @@ header {
 }
 
 .logo {
-    border: 1px solid rgb(255, 133, 249);
+    border: 2px solid #ffff;
+    border-radius: 40%;
     margin-left: 4px;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
 }
 
 .boton {
     background: pink;
     border-radius: 10px;
-    border: none;
-    padding: 6px;
+    border: 1px solid #ffff;
+    padding: 10px;
     margin-right: 1em;
-    font-weight: bold;
 }
 
 .botonLogin:hover {
-    background: linear-gradient(to left, rgb(165, 247, 127), rgb(188, 247, 239));
-    font-weight: bold;
+    background: #FEF0D6;
+    border: 1px solid #ffff;
 }
 
 .botonRegistro:hover {
-    background: linear-gradient(to left, rgb(127, 188, 245), rgb(108, 110, 253));
-    font-weight: bold;
+    background: #D2DAE9;
+    border: 1px solid #ffff;
 }
 
 /* --------------------- */
@@ -44,9 +43,10 @@ header {
 
 /* Body */
 .imgPresentacion {
+    border: 2px solid #ffff;
     display: flex;
-    margin: 1em 5%;
-    width: 1000px;
+    margin: 1em 0;
+    width: 100%;
     height: 240px;
 }
 
@@ -60,9 +60,9 @@ header {
 
 .imgPresentacion img:hover {
     cursor: crosshair;
-    width: 300px;
+    width: 120px;
     opacity: 1;
-    filter: contrast(120%);
+    filter: contrast(100%);
 }
 
 .presentación {
@@ -75,31 +75,33 @@ header {
 }
 
 .intro {
-    color: aliceblue;
-    width: 70%;
+    color: rgb(0, 0, 0);
     text-align: justify;
 }
 
 .cartaX {
-    border: 1px solid rgb(255, 133, 249);
     width: 20%;
     height: auto;
-    margin-left: 10px;
+    margin-left: 60px;
+    filter: brightness(1.1);
+    mix-blend-mode: multiply;
 }
+
 /* --------------------- */
 /* --------------------- */
 
 /* Footer */
 footer {
-    background-color: rgb(30, 30, 30);
+    background-color: #d9cfde;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-top: 2px solid rgb(255, 255, 255);
     padding-top: 1em;
     padding-left: 25%;
     margin-top: auto;
-    color: aliceblue;
+    color: rgb(0, 0, 0);
 }
 
 a {
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     text-decoration: none;
 }

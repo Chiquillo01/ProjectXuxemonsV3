@@ -38,6 +38,7 @@ export class CrearComponent {
       nombre: new FormControl('', [Validators.required]),
       tipo: new FormControl('', [Validators.required]),
       archivo: new FormControl('', [Validators.required]),
+      categoria: new FormControl('', [Validators.required]),
     });
   }
 
@@ -49,6 +50,7 @@ export class CrearComponent {
     if (this.xuxemonForm.valid) {
       this.xuxemonsService.createXuxemon(this.xuxemonForm.value).subscribe({
         next: () => {
+          alert('Xuxemon creado con exito');
           this.router.navigate(['/xuxedex']);
         },
         error: (error) => {

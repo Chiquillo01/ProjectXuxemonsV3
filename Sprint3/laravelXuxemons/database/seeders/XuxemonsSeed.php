@@ -35,12 +35,24 @@ class XuxemonsSeed extends Seeder
             'Tierra', 'Tierra', 'Tierra', 'Tierra', 'Agua', 'Aire',
         ];
 
+        $categoria = [
+            'normal', 'normal', 'normal', 'normal', 'normal', 'normal',
+            'normal', 'normal', 'normal', 'normal', 'normal', 'normal',
+            'normal', 'normal', 'normal', 'normal',  'normal', 'normal',
+            'normal', 'normal', 'normal', 'normal', 'normal', 'normal',
+            'normal', 'normal', 'normal', 'normal', 'normal', 'normal',
+            'normal', 'normal', 'normal', 'normal',  'normal', 'normal', 
+            'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 
+            'legendario', 'legendario', 'legendario', 'legendario', 'legendario', 'legendario',
+        ];
+
         for ($i = 0; $i < count($nombres); $i++) {
 
             DB::table('xuxemons')->insert([
                 'nombre' => $nombres[$i],
                 'tipo' => $tipo[$i],
                 'archivo' => strtolower($nombres[$i]) . '.png',
+                'categoria' => $categoria[$i],
             ]);
         }
     }

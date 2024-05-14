@@ -16,6 +16,11 @@ export class CajaComponent implements OnInit {
   xuxemonsUser: XuxemonsUsers[] = [];
   xuxemonsUserActivos: XuxemonsUsers[] = [];
   enfermedades: EnfermedadesUser[] = [];
+  // Filtro //
+  categoria: string = "";
+  // Pasar páginas //
+  currentPage: number = 1;
+  itemsPerPage: number = 15;
 
   constructor(
     private tokenService: TokenService,
@@ -28,37 +33,6 @@ export class CajaComponent implements OnInit {
     this.getEnfermedades();
     this.getXuxemons();
     this.getXuxemonsActivos();
-  }
-
-  /**
-   * Nombre: getImageStyle
-   * Función: Modificar el tamaño de la imagen segun el tamaño del xuxemon
-   * @param tamano
-   * @returns width
-   */
-  getImageStyle(tamano: string): any {
-    let width: number;
-    const paqueno = 50;
-    const mediano = 100;
-    const grande = 150;
-
-    switch (tamano) {
-      case 'pequeno':
-        width = paqueno;
-        break;
-      case 'mediano':
-        width = mediano;
-        break;
-      case 'grande':
-        width = grande;
-        break;
-      default:
-        width = paqueno;
-        break;
-    }
-    return {
-      'width.px': width,
-    };
   }
 
   /**
@@ -141,30 +115,150 @@ export class CajaComponent implements OnInit {
   }
 
   /**
-   * Nombre: alimentarXuxemon
-   * Función: para editar el Xuxemon
+   * Nombre: conseguirCategorias
+   * Función: consigue las categorias existentes para hacer el filtro
    */
-  getEnfermedades() {
-    // const userToken = this.tokenService.getToken();
-    // // const enfId = this.curaId;
-    // // console.log(enfId);
-
-    // if (userToken !== null) {
-    //   this.curarService.getAllEnfermedades(userToken).subscribe({
-    //     next: (Enfermedades: any) => {
-    //       this.enfermedades = Enfermedades;
-    //       // this.getXuxemons();
-    //       // console.log(this.enfermedades);
-    //       // console.log(Enfermedades);
-    //     },
-    //     error: (error) => {
-    //       console.error('Error obteniendo enfermedades:', error);
-    //     },
-    //   });
-    // } else {
-    //   console.error('User ID is null');
-    // }
+  conseguirCategorias(): string[] {
+    const categorias = this.xuxemonsUser.map(value => value.categoria);
+    return categorias.filter((value: string, idx: number) => categorias.indexOf(value) == idx);
   }
+  /**
+   * Nombre: obtenerXuxemonsPorCategoria
+   * Función: obtiene las categorias de los xuxemons para poder hacer el filtraje con estas
+   */
+  obtenerXuxemonsPorCategoria(): XuxemonsUsers[] {
+    const xuxemonsFiltrados = this.xuxemonsUser.filter(xuxemon => {
+      return (xuxemon.categoria && xuxemon.categoria.toLowerCase() === this.categoria.toLowerCase());
+    });
+    return xuxemonsFiltrados;
+  }
+
+  /**
+   * Nombre: getCurrentPageXuxemons
+   * Función: devuelve los Xuxemons correspondientes a la página actual
+   */
+  getCurrentPageXuxemons(): XuxemonsUsers[] {
+    const filteredXuxemons = this.obtenerXuxemonsPorCategoria();
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return filteredXuxemons.slice(startIndex, endIndex);
+  }
+
+  /**
+   * Nombre: prevPage, nextPage, totalPages
+   * Función: controlan la paginación de los xuxemons
+   */
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+  nextPage() {
+    if (this.currentPage < this.totalPages()) {
+      this.currentPage++;
+    }
+  }
+  totalPages(): number {
+    const filteredXuxemons = this.obtenerXuxemonsPorCategoria();
+    return Math.ceil(filteredXuxemons.length / this.itemsPerPage);
+  }
+
+  getStyle(tipo: string) {
+    const borderStyle = this.getBorderStyle(tipo);
+    const backgroundStyle = this.getBackgrounStyle(tipo);
+
+    return Object.assign({}, borderStyle, backgroundStyle);
+  }
+
+  getBorderStyle(tipo: string) {
+    let border: string;
+
+    const agua = '5px solid rgb(9, 91, 243)';
+    const tierra = '5px solid rgb(245, 94, 7)';
+    const aire = '5px solid rgb(2, 254, 212)';
+
+
+    switch (tipo) {
+      case 'Agua': border = agua; break;
+      case 'Tierra': border = tierra; break;
+      case 'Aire': border = aire; break;
+      default: border = '5px solid black'; break;
+    }
+    return {
+      'border': border,
+    };
+  }
+
+  getBackgrounStyle(tipo: string) {
+    let background: string;
+
+    const agua = 'linear-gradient(to bottom, #6193EA, #FFFFFF)';
+    const tierra = 'linear-gradient(to bottom, #EA8A60, #FFFFFF)';
+    const aire = 'linear-gradient(to bottom, #81FFF7 , #FFFFFF)';
+
+
+    switch (tipo) {
+      case 'Agua': background = agua; break;
+      case 'Tierra': background = tierra; break;
+      case 'Aire': background = aire; break;
+      default: background = 'linear-gradient(to bottom, #ff0000, #FFFFFF);'; break;
+    }
+    return {
+      'background': background,
+    };
+  }
+
+  getTipeStyle(tipo: string) {
+    let color: string;
+
+    const agua = 'rgb(9, 91, 243)';
+    const tierra = 'rgb(245, 94, 7)';
+    const aire = 'rgb(2, 254, 212)';
+
+
+    switch (tipo) {
+      case 'Agua': color = agua; break;
+      case 'Tierra': color = tierra; break;
+      case 'Aire': color = aire; break;
+      default: color = 'black'; break;
+    }
+    return {
+      'color': color,
+    };
+  }
+
+  /**
+   * Nombre: getImageStyle
+   * Función: Modificar el tamaño de la imagen segun el tamaño del xuxemon
+   * @param tamano
+   * @returns width
+   */
+  getImageStyle(tamano: string): any {
+    let width: number;
+    const paqueno = 50;
+    const mediano = 100;
+    const grande = 150;
+
+    switch (tamano) {
+      case 'pequeno':
+        width = paqueno;
+        break;
+      case 'mediano':
+        width = mediano;
+        break;
+      case 'grande':
+        width = grande;
+        break;
+      default:
+        width = paqueno;
+        break;
+    }
+    return {
+      'width.px': width,
+    };
+  }
+
+
 
   /**
    * Nombre: debug
@@ -176,12 +270,10 @@ export class CajaComponent implements OnInit {
     console.log(userToken);
     this.xuxemonsService.createRandomXuxemon(userToken!).subscribe({
       next: (respuesta) => {
-        alert('Xuxemon creardo con exito.');
         console.log(respuesta);
         this.getXuxemons();
       },
       error: (error) => {
-        alert('Xuxemon no se ha podido crear.');
         console.log(error);
       },
     });
@@ -241,16 +333,6 @@ export class CajaComponent implements OnInit {
   }
 
   /**
-   * Nombre: favorito
-   * Función: Envia los valores necesarios para añadir o quitar al xuxemon
-   * seleccionado como favorito
-   * @param xuxeUser
-   */
-  hospital() {
-    this.router.navigate(['/home/home/hospital']);
-  }
-
-  /**
    * Nombre: alimentar
    * Función: Envia al usuario a a ruta para alimentar al Xuxemon, a su vez esta enviando los datos del xuxuemon
    */
@@ -268,6 +350,42 @@ export class CajaComponent implements OnInit {
       ['/alimentar'],
       navigationExtras
     );
+  }
+
+  /**
+   * Nombre: alimentarXuxemon
+   * Función: para editar el Xuxemon
+   */
+  getEnfermedades() {
+    // const userToken = this.tokenService.getToken();
+    // // const enfId = this.curaId;
+    // // console.log(enfId);
+
+    // if (userToken !== null) {
+    //   this.curarService.getAllEnfermedades(userToken).subscribe({
+    //     next: (Enfermedades: any) => {
+    //       this.enfermedades = Enfermedades;
+    //       // this.getXuxemons();
+    //       // console.log(this.enfermedades);
+    //       // console.log(Enfermedades);
+    //     },
+    //     error: (error) => {
+    //       console.error('Error obteniendo enfermedades:', error);
+    //     },
+    //   });
+    // } else {
+    //   console.error('User ID is null');
+    // }
+  }
+
+  /**
+   * Nombre: favorito
+   * Función: Envia los valores necesarios para añadir o quitar al xuxemon
+   * seleccionado como favorito
+   * @param xuxeUser
+   */
+  hospital() {
+    this.router.navigate(['/hospital']);
   }
 
   /**

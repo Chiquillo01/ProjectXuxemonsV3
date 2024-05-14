@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 // --- //
 import { MainComponent } from './main.component';
 import { ErrorComponent } from './error/error.component';
@@ -66,7 +67,7 @@ const routes: Routes = [
     ConfigComponent,
     ContactosComponent,
   ],
-  imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule,],
+  imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, FormsModule,],
   exports: [RouterModule,],
 })
 export class MainModule { }

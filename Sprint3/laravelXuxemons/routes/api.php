@@ -17,6 +17,11 @@ Route::get('/xuxemons', [XuxemonsController::class, 'show']);
 Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show']);
 // Actualización de Xuxemon //
 Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'update']);
+Route::post('/xuxemons/activo', [XuxemonsUserController::class, 'updateActivo']);
+Route::post('/xuxemons/favorito', [XuxemonsUserController::class, 'updateFav']);
+// Actualizar tamaño para la evolución por defecto ( uso del administrador) //
+Route::put('/xuxemons/evolucionar', [XuxemonsUserController::class, 'evolucionarXuxemon']);
+Route::put('/xuxemons/evolucionar2', [XuxemonsUserController::class, 'evolucionarXuxemon2']);
 // Eliminar un xuxemon //
 Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 // Actualizar configuraciones del administrador //
@@ -45,11 +50,7 @@ Route::post('/login', [Controller::class, 'login']);
 
 
 
-Route::post('/xuxemons/activo', [XuxemonsUserController::class, 'updateActivo']);
-Route::post('/xuxemons/favorito', [XuxemonsUserController::class, 'updateFav']);
-// Actualizar tamaño para la evolución por defecto ( uso del administrador) //
-Route::put('/xuxemons/evolucionar', [XuxemonsUserController::class, 'evolucionarXuxemon']);
-Route::put('/xuxemons/evolucionar2', [XuxemonsUserController::class, 'evolucionarXuxemon2']);
+
 
 // Actualizar alimentos xuxemon usuario //
 Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimentar']);

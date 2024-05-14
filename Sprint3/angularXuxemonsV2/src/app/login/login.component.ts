@@ -31,8 +31,8 @@ export class LoginComponent {
   Login() {
     this.usersService.Login(this.loginForm.value).subscribe({
       next: (data: any) => {
-        this.router.navigate(['/home']);
         this.tokenService.setToken(data);
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         alert('Correo electrónico o contraseña erroneos');

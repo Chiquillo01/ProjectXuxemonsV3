@@ -1,38 +1,24 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: Georgia, serif;
-}
-
-body {
-    background-color: rgb(65, 65, 65);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 form {
-    background-color: rgb(132, 132, 132);
+    background-color: #d9cfde;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     align-content: center;
     align-items: center;
     border-radius: 20px;
-    border: 5px solid aquamarine;
-    width: 50%;
+    border: 2px solid #ffff;
+    width: 60%;
     height: auto;
-    margin-left: 25%;
-    margin-top: 2em;
+    margin-left: 20%;
+    margin-top: 8em;
 }
 
 img {
-    border: 2px solid white;
+    border: 2px solid #ffff;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin: 4% 0 2% 40%;
+    width: 80px;
+    height: 80px;
+    margin: 4% 0 2% 45%;
 }
 
 img:hover {
@@ -42,15 +28,15 @@ img:hover {
 
 label {
     width: 90%;
-    margin-left: 12px;
+    margin-left: 20px;
     margin-bottom: 4px;
     font-weight: bold;
 }
 
 input {
-    width: 90%;
+    width: 92%;
     padding: 4px;
-    margin-left: 12px;
+    margin-left: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid rgb(219, 156, 255);
@@ -58,6 +44,10 @@ input {
 
 input:hover {
     border: 1px solid rgb(255, 133, 249);
+}
+
+::placeholder {
+    font-size: 0.60em;
 }
 
 .flexBotones {
@@ -69,34 +59,34 @@ input:hover {
 }
 
 .boton {
-    color: white;
+    background-color: pink;
+    color: black;
     border-radius: 5px;
     border: none;
     padding: 5px 10px;
+
     text-align: center;
     width: auto;
 }
 
 .registrar {
-    background-color: #008cba;
-    border: 2px solid #008cba;
-    margin: 0 10% 1em 0;
-}
-
-.registrar:hover {
-    background-color: #229faf;
-    border: 2px solid rgb(255, 133, 249);
-}
-
-.logear {
-    background-color: #4caf50;
-    border: 2px solid #4caf50;
+    border: 1px solid #ffff;
     margin: 0 6% 1em 0;
 }
 
+.registrar:hover {
+    background: #D2DAE9;
+    border: 1px solid #ffff;
+}
+
+.logear {
+    border: 1px solid #ffff;
+    margin: 0 10% 1em 0;
+}
+
 .logear:hover {
-    background-color: #41a546;
-    border: 2px solid rgb(255, 133, 249);
+    background: #FEF0D6;
+    border: 1px solid #ffff;
 }
 
 p {

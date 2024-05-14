@@ -13,6 +13,7 @@ class Xuxemons extends Model
         'tipo',
         'archivo',
         'tamano',
+        'categoria',
         'evo1',
         'evo2',
     ];

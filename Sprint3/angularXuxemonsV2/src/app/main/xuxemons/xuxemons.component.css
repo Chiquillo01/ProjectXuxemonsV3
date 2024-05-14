@@ -1,21 +1,16 @@
 .cuerpoHome {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     border-radius: 5px;
     padding: 20px;
-    margin: 4em 0;
+    margin: 5em 0 0 0;
+    height: auto;
 }
 
 .homeCards {
-    background-color: rgb(162, 255, 255);
-    border: 2px solid rgb(255, 133, 249);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 32%;
 }
 
 .homeCards>a {
@@ -24,29 +19,25 @@
     width: 100%;
 }
 
-.homeCards>p {
-    font-weight: bold;
-}
-
 .homeCards:hover .homeImg {
-    transform: scale(1.20);
+    transform: scale(1.25);
 }
 
 .homeImg {
-    margin-top: 10px;
-    height: 100px;
-    width: 100px;
+    border: 2px solid #ffff;
+    border-radius: 50%;
+    height: 220px;
+    width: 220px;
     transition: transform 0.3s ease;
 }
 
 .homeCards:hover .homeText {
     font-weight: bold;
-    transform: scale(1.3);
+    transform: scale(1.1);
 }
 
 .homeText {
     text-align: center;
-    margin-top: 8px;
-    font-weight: bold;
+    margin-top: 12px;
     transition: transform 0.3s ease;
 }

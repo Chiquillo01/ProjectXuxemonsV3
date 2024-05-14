@@ -93,6 +93,7 @@ class XuxemonsUserController extends Controller
                     'xuxemons.nombre',
                     'xuxemons.tipo',
                     'xuxemons.archivo',
+                    'xuxemons.categoria',
                     'xuxemons.tamano',
                     'xuxemons.evo1',
                     'xuxemons.evo2'
@@ -134,6 +135,7 @@ class XuxemonsUserController extends Controller
                     'xuxemons.nombre',
                     'xuxemons.tipo',
                     'xuxemons.archivo',
+                    'xuxemons.categoria',
                     'xuxemons.tamano',
                     'xuxemons.evo1',
                     'xuxemons.evo2'
