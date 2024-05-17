@@ -15,9 +15,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('xuxemon_id');
             $table->unsignedBigInteger('user_id');
             $table->string('tamano')->default('pequeno');
-            $table->string('categoria', 15)->default('normal');
-            $table->integer('evo1')->nullable()->default(3);
-            $table->integer('evo2')->nullable()->default(5);
             $table->integer('comida')->nullable()->default(0);
             $table->integer('activo')->nullable()->default(false);
             $table->integer('favorito')->nullable()->default(false);

@@ -93,12 +93,9 @@ export class AlimentarComponent {
     this.xuxemonsService
       .evolucionarXuxemon(newXuxeData, this.cumpleEvo1)
       .subscribe({
-        next: (returns) => {
-          window.alert(JSON.stringify(returns));
-          this.cumpleEvo1 = returns.cumpleEvo1;
-          this.cumpleEvo2 = returns.cumpleEvo2;
-          this.router.navigate(['/alimentar']);
-          this.ngOnInit();
+        next: () => {
+          this.router.navigate(['/caja']);
+
         },
         error: (error) => {
           window.alert(JSON.stringify(error));
@@ -118,9 +115,7 @@ export class AlimentarComponent {
     this.xuxemonsService
       .evolucionarXuxemon2(newXuxeData, this.cumpleEvo2)
       .subscribe({
-        next: (returns) => {
-          window.alert(JSON.stringify(returns));
-          this.ngOnInit();
+        next: () => {
           this.router.navigate(['/caja']);
         },
         error: (error) => {

@@ -3,8 +3,8 @@ export interface Xuxemons {
     nombre: string;
     tipo: string;
     archivo: string;
-    tamano: number;
     categoria: string;
+    tamano: number;
     evo1: number;
     evo2: number;
     created_at?: string;

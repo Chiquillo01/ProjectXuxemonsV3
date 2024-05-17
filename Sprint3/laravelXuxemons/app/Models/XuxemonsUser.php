@@ -13,6 +13,7 @@ class XuxemonsUser extends Model
     protected $fillable = [
         'xuxemon_id',
         'user_id',
+        'tamano',
         'comida',
         'activo',
         'favorito',

@@ -50,6 +50,10 @@
     height: 100px;
 }
 
+.imgFormat:hover{
+    cursor: pointer;
+}
+
 .imgFormat-xux {
     align-content: center;
     min-height: 150px;

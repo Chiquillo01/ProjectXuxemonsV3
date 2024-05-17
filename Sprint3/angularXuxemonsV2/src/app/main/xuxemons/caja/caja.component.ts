@@ -46,19 +46,6 @@ export class CajaComponent implements OnInit {
       this.xuxemonsService.getAllXuxemonsUser(userToken).subscribe({
         next: (xuxemonsUser: any) => {
           this.xuxemonsUser = xuxemonsUser[0];
-          this.xuxemonsUser.forEach((xuxemon) => {
-            this.enfermedades.forEach((enfermedad) => {
-              if (xuxemon.xuxemon_id === enfermedad.xuxemon_id) {
-                if (enfermedad.enfermedad_id == 1) {
-                  if (enfermedad.infectado) {
-                    xuxemon.noComer = true;
-                  } else {
-                    xuxemon.noComer = false;
-                  }
-                }
-              }
-            });
-          });
         },
         error: (error) => {
           console.error('Error fetching Xuxemons:', error);
@@ -329,7 +316,6 @@ export class CajaComponent implements OnInit {
    * Función: Envia al usuario a a ruta para alimentar al Xuxemon, a su vez esta enviando los datos del xuxuemon
    */
   alimentar(xuxeUser: any) {
-    console.log('Datos de xuxeUser:', xuxeUser);
     const navigationExtras: NavigationExtras = {
       queryParams: {
         id: xuxeUser.xuxemon_id,

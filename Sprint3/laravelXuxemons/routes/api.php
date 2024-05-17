@@ -19,7 +19,7 @@ Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show'])
 Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'update']);
 Route::post('/xuxemons/activo', [XuxemonsUserController::class, 'updateActivo']);
 Route::post('/xuxemons/favorito', [XuxemonsUserController::class, 'updateFav']);
-// Actualizar tamaño para la evolución por defecto ( uso del administrador) //
+// Evolucionar al Xuxemon correspondiente //
 Route::put('/xuxemons/evolucionar', [XuxemonsUserController::class, 'evolucionarXuxemon']);
 Route::put('/xuxemons/evolucionar2', [XuxemonsUserController::class, 'evolucionarXuxemon2']);
 // Eliminar un xuxemon //

@@ -68,10 +68,7 @@ class XuxemonsUserController extends Controller
             $nuevoXuxemonUsuario = new XuxemonsUser();
             $nuevoXuxemonUsuario->xuxemon_id = $xuxemonAleatorio->id;
             $nuevoXuxemonUsuario->user_id = $user->id;
-            $nuevoXuxemonUsuario->categoria = $xuxemonAleatorio->categoria;
             $nuevoXuxemonUsuario->tamano = $xuxemonAleatorio->tamano;
-            $nuevoXuxemonUsuario->evo1 = $xuxemonAleatorio->evo1;
-            $nuevoXuxemonUsuario->evo2 = $xuxemonAleatorio->evo2;
 
             $nuevoXuxemonUsuario->save();
 
@@ -95,8 +92,7 @@ class XuxemonsUserController extends Controller
                 ->first();
 
             if (!$user) {
-                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
-                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+                return response()->json(['message' => 'Usuario no encontrado', $user], 404);
             }
 
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
@@ -106,12 +102,11 @@ class XuxemonsUserController extends Controller
                 ->select(
                     'xuxemons_users.*',
                     'xuxemons.nombre',
-                    'xuxemons.tipo',
                     'xuxemons.archivo',
                     'xuxemons.categoria',
-                    'xuxemons.tamano',
+                    'xuxemons.tipo',
                     'xuxemons.evo1',
-                    'xuxemons.evo2'
+                    'xuxemons.evo2',
                 )
                 ->orderBy('xuxemons_users.favorito', 'desc')
                 ->get();
@@ -148,12 +143,11 @@ class XuxemonsUserController extends Controller
                 ->select(
                     'xuxemons_users.*',
                     'xuxemons.nombre',
-                    'xuxemons.tipo',
                     'xuxemons.archivo',
                     'xuxemons.categoria',
-                    'xuxemons.tamano',
+                    'xuxemons.tipo',
                     'xuxemons.evo1',
-                    'xuxemons.evo2'
+                    'xuxemons.evo2',
                 )
                 ->get();
 
@@ -268,8 +262,7 @@ class XuxemonsUserController extends Controller
                 ->first();
 
             if (!$user) {
-                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
-                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
             }
 
             $xuxemonInfo = XuxemonsUser::where('user_id', $user->id)
@@ -300,7 +293,6 @@ class XuxemonsUserController extends Controller
                     ->first();
 
                 if (!$user) {
-                    // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
                     return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
                 }
 
@@ -362,10 +354,9 @@ class XuxemonsUserController extends Controller
             if ($cumpleEvo1) {
                 DB::transaction(function () use ($user, $xuxemon_id) {
                     // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-                    XuxemonsUser::where('user_id', $user)
+                    XuxemonsUser::where('user_id', $user->id)
                         ->where('xuxemon_id', $xuxemon_id)
-                        ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
-                        ->update(['xuxemons.tamano' => 'mediano']);
+                        ->update(['tamano' => 'mediano']);
                 });
             }
             return response()->json(['message' => 'Xuxemon evolucionado con éxito.'], 200);
@@ -391,17 +382,14 @@ class XuxemonsUserController extends Controller
                 ->first();
 
             if (!$user) {
-                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
                 return response()->json(['message' => 'Usuario no encontrado', $user], 404);
             }
 
             if ($cumpleEvo2) {
                 DB::transaction(function () use ($user, $xuxemon_id) {
-                    // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-                    XuxemonsUser::where('user_id', $user)
+                    XuxemonsUser::where('user_id', $user->id)
                         ->where('xuxemon_id', $xuxemon_id)
-                        ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
-                        ->update(['xuxemons.tamano' => 'grande']);
+                        ->update(['tamano' => 'grande']);
                 });
             }
             return response()->json(['message' => 'Xuxemon evolucionado con éxito.'], 200);

@@ -1,28 +1,22 @@
 .first-section {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.antidotos {
-  border: 2px;
-  border-style: none solid solid solid;
-  border-color: #ffff;
-  border-radius: 5px;
-  margin: 1em 0;
-  min-width: 70%;
-  min-height: 200px;
-}
 
 h3 {
   text-align: center;
 }
 
 .crearB {
+  border-bottom: 2px solid #E7E4F1;
   color: black;
   padding: 10px;
+  margin-top: 0.5em;
   margin-right: 30px;
+  margin-bottom: 0.5em;
   text-decoration: none;
 }
 
