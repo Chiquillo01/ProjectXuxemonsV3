@@ -1,0 +1,28 @@
+<header>
+    <div class="container">
+        <div class="formatHeader">
+            <span>
+                <a routerLink="home"><img src="../../../assets/landingPage/logo.png" alt="User" class="logo"></a>
+            </span>
+            <span>
+                <a routerLink="/contactos" class="imgHeader">Contactos</a>
+                <a routerLink="/hospital" class="imgHeader">Hospital</a>
+                <a routerLink="/inventario" class="imgHeader">Inventario</a>
+                <a routerLink="/xuxemons" class="imgHeader">Xuxemons</a>
+            </span>
+            <span>
+                <!-- Solo para usuario administrador -->
+                <span *ngIf="userRole === 1">
+                    <a routerLink="/config"><img class="imgHeaderAdmin" src="../../../assets/home/header/config.png"
+                            alt="error config"></a>
+                </span>
+                <!-- //////////////////////////////////////// -->
+                <a (click)="logout()">
+                    <img class="button_slide" alt="Logo" onmouseout="this.src='../../../assets/home/header/user.png'"
+                        onmouseover="this.src='../../../assets/home/header/user1.png';"
+                        src="../../../assets/home/header/user1.png">
+                </a>
+            </span>
+        </div>
+    </div>
+</header>

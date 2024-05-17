@@ -1,0 +1,15 @@
+/* Footer */
+footer {
+    background-color: #d9cfde;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-top: 2px solid rgb(255, 255, 255);
+    padding-top: 1em;
+    padding-left: 25%;
+    margin-top: auto;
+    color: rgb(0, 0, 0);
+}
+
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}

@@ -1,0 +1,99 @@
+form {
+    background-color: #d9cfde;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 2px solid #ffff;
+    width: 50%;
+    height: auto;
+    margin-left: 25%;
+    margin-top: 2em;
+}
+
+img {
+    border: 2px solid #ffff;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 4% 0 2% 45%;
+}
+
+img:hover {
+    border: 2px solid rgb(255, 133, 249);
+    cursor: pointer;
+}
+
+label {
+    width: 90%;
+    margin-left: 25px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+input {
+    width: 90%;
+    padding: 4px;
+    margin-left: 25px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid rgb(219, 156, 255);
+}
+
+input:hover {
+    border: 2px solid rgb(255, 133, 249);
+}
+
+.labelCheck {
+    width: auto;
+}
+
+.checkbox {
+    width: auto;
+    margin-left: 5px;
+    margin-bottom: 6px;
+}
+
+.flexBotones {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+::placeholder {
+    font-size: 0.60em;
+}
+
+.boton {
+    background-color: pink;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+
+    text-align: center;
+    width: auto;
+}
+
+.registrar {
+    border: 1px solid #ffff;
+    margin: 0 6% 1em 0;
+}
+
+.registrar:hover {
+    background: #D2DAE9;
+    border: 1px solid #ffff;
+}
+
+.logear {
+    border: 1px solid #ffff;
+    margin: 0 10% 1em 0;
+}
+
+.logear:hover {
+    background: #FEF0D6;
+    border: 1px solid #ffff;
+}

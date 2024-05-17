@@ -1,0 +1,30 @@
+<body>
+    <div class="flexContainer">
+        <p>
+            <a href="/xuxedex">
+                <img class="atras" src="../../../../../assets/home/Xuxemons/crear-editar/flecha.png" alt="Atras">
+            </a>
+        </p>
+
+        <form [formGroup]="xuxemonForm" (ngSubmit)="crearXuxemon()">
+            <h2>Crear Xuxemon</h2>
+            <input formControlName="nombre" type="text" placeholder="Nombre"><br>
+
+            <select formControlName="tipo">
+                <option value="Tierra">Tierra</option>
+                <option value="Aire">Aire</option>
+                <option value="Agua">Agua</option>
+            </select>
+
+            <input formControlName="archivo" type="text" placeholder="Nombre del archivo"><br>
+
+            <select formControlName="categoria">
+                <option value="normal">Normal</option>
+                <option value="legendario">Legendario</option>
+            </select><br>
+
+            <button class="boton" type="submit" [disabled]="!xuxemonForm.valid">Crear</button>
+        </form>
+    </div>
+
+</body>

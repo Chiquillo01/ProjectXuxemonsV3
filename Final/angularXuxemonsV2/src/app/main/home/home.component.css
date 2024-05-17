@@ -1,0 +1,43 @@
+.cuerpoHome {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 5em 0 0 0;
+    height: auto;
+}
+
+.homeCards {
+    display: flex;
+    flex-direction: column;
+}
+
+.homeCards>a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.homeCards:hover .homeImg {
+    transform: scale(1.25);
+}
+
+.homeImg {
+    border: 2px solid #ffff;
+    border-radius: 50%;
+    height: 220px;
+    width: 220px;
+    transition: transform 0.3s ease;
+}
+
+.homeCards:hover .homeText {
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+.homeText {
+    text-align: center;
+    margin-top: 12px;
+    transition: transform 0.3s ease;
+}
