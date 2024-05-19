@@ -6,6 +6,8 @@ use \App\Http\Controllers\Controller;
 use \App\Http\Controllers\XuxemonsController;
 use \App\Http\Controllers\XuxemonsUserController;
 use App\Http\Controllers\ChuchesUserController;
+use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\IntercambioController;
 
 
 // Rutas para los Xuxemons //
@@ -46,6 +48,7 @@ Route::get('/chuchesUser/{userId}', [ChuchesUserController::class, 'show']);
 // Rutas del usuario Usuario // 
 Route::post('/register', [Controller::class, 'register']);
 Route::post('/login', [Controller::class, 'login']);
+Route::get('/usuario/{userToken}', [Controller::class, 'show']);
 // ---------------------- //
 // ---------------------- //
 
@@ -54,3 +57,36 @@ Route::get('/inventario', [Controller::class, 'inventario']);
 Route::get('/hospital/{userToken}', [Controller::class, 'hospital']);
 // ---------------------- //
 // ---------------------- //
+
+// Rutas Contactos //
+// Crear peticion usuarios //
+Route::post('/usuarios', [ContactosController::class, 'crear']);
+// acceptar peticion usuarios //
+Route::post('/acceptar', [ContactosController::class, 'acceptar']);
+// Crear peticion usuarios //
+Route::post('/denegar', [ContactosController::class, 'denegar']);
+// Crear peticion usuarios //
+Route::post('/guardarmensaje', [ContactosController::class, 'guardarMensaje']);
+// Muestra solicitudes de amisatad del usuarios //
+Route::get('/showSolicitudes/{userId}', [ContactosController::class, 'showSolicitudes']);
+// Muestra los amigos del usuario //
+Route::get('/show/{userId}', [ContactosController::class, 'showFriends']);
+// Muestra el chat //
+Route::get('/show/{userToken}/&/{idUser}', [ContactosController::class, 'showChat']);
+
+// Rutas Intercambio //
+// Mostrar los xuxemons del otro usuario //
+Route::get('/xuxemonsOtherUser/{userId}', [IntercambioController::class, 'showXuxemonsUser']);
+// Mostrar la informacion del otro usuario //
+Route::get('/otherUsuario/{userToken}', [IntercambioController::class, 'showOtherUser']);
+// muestra la informacion del intercambio
+Route::get('/showTrade/{userToken}', [IntercambioController::class, 'mostrarIntercambio']);
+
+//implementar las rutas en el servicio
+// Mostrar todos los xuxemons del usuario //
+Route::post('/trade', [IntercambioController::class, 'solicitudIntercambio']);
+// Accepta y intercambia los xuxemons
+Route::post('/acceptTrade', [IntercambioController::class, 'acceptarIntercambio']);
+// obtiene la informacion de los xuxemosn a tradear
+Route::get('/xuxemonsTrade1/{usertoken}/{idUser}', [IntercambioController::class, 'xuxemonsIntercambio1']);
+Route::get('/xuxemonsTrade2/{usertoken}/{idUser}', [IntercambioController::class, 'xuxemonsIntercambio2']);

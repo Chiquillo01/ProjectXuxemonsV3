@@ -107,6 +107,21 @@ class Controller extends BaseController
         }
     }
 
+    public function show($userToken){
+        try {
+            // Obtener el usuario a partir del token proporcionado
+            $user = User::where('remember_token', $userToken)->get();
+
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
+            }
+
+            return response()->json($user, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al retornar las solicitudes: ' . $e->getMessage()], 500);
+        }
+    }
+
     /**
      * Nombre: inventario
      * Función: recoje todos los valores que hay en la bd de curas

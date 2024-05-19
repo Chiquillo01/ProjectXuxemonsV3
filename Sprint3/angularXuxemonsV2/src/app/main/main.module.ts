@@ -20,6 +20,8 @@ import { CajaComponent } from './xuxemons/caja/caja.component';
 import { AlimentarComponent } from './xuxemons/caja/alimentar/alimentar.component';
 import { ObjetosComponent } from './inventario/objetos/objetos.component';
 import { ContactosComponent } from './contactos/contactos.component';
+import { IntercambioComponent } from './intercambio/intercambio.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,8 @@ const routes: Routes = [
       { path: 'editar', component: EditarComponent },
       { path: 'caja', component: CajaComponent },
       { path: 'alimentar', component: AlimentarComponent },
+      { path: 'intercambio', component: IntercambioComponent},
+      { path: 'profile-user', component: ProfileUserComponent}
     ],
   },
   {
@@ -66,6 +70,8 @@ const routes: Routes = [
     ObjetosComponent,
     ConfigComponent,
     ContactosComponent,
+    IntercambioComponent,
+    ProfileUserComponent,
   ],
   imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, FormsModule,],
   exports: [RouterModule,],

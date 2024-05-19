@@ -85,7 +85,7 @@ class XuxemonsUserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, $userToken)
+    public function show($userToken)
     {
         try {
 

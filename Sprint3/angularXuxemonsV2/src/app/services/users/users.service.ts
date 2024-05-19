@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Curas } from '../../models/curas/curas.model';
 import { Hospital } from 'src/app/models/hospital/hospital.model';
+import { Users } from 'src/app/models/users/users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,11 @@ export class UsersService {
     } else {
       return true;
     }
+  }
+
+  getUsuario(userToken: string): Observable<Users[]> {
+
+    return this.http.get<Users[]>(`http://127.0.0.1:8000/api/usuario/${userToken}`);
   }
 
   /* --- Recojer los items --- */
