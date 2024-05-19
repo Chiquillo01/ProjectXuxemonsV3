@@ -12,6 +12,8 @@ class Horario extends Model
     protected $fillable = [
         'chuche_maximas',
         'debug',
-        'id_users'
+        'id_users',
+        'date_debug',
+        'last_claim_date'
     ];
 }

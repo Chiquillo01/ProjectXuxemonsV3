@@ -99,31 +99,14 @@ export class ChuchesComponent implements OnInit {
    */
   debug(): void {
     const userToken = this.tokenService.getToken();
-    //   // crea o actualiza el horario del usuario
-    //   this.chuchesService.horario(userToken!).subscribe({
-    //     next: () => {
-    //       console.log('Horario creado');
-    //     },
-    //     error: (error) => {
-    //       alert('Horario fallido.');
-    //       console.log(error);
-    //     },
-    //   });
 
-
-    //   console.log(this.horario);
-    //   console.log(this.horario[0].debug);
-
-    //   if (this.horario[0].debug || this.userRol == 1) {
-    // crea o añade al stack las chuches
     if (userToken !== null) {
       this.chuchesService.createChuchesAleatorios(userToken).subscribe({
         next: () => {
           this.getChuches();
-          //         this.getHorario();
-          //         this.activarHorario();
         },
         error: (error) => {
+          console.log(error)
           window.alert(JSON.stringify(error));
         },
       });

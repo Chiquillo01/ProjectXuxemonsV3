@@ -53,9 +53,7 @@ export class AlimentarComponent {
    * @param newAlimentData
    */
   alimentarXuxemon(newAlimentData: number) {
-    // const userToken = this.tokenService.getToken();
     const newXuxeData = parseInt(this.xuxeData.id);
-    // const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
 
     this.xuxemonsService.alimentar(newXuxeData, newAlimentData).subscribe({
       next: (returns) => {
@@ -68,18 +66,6 @@ export class AlimentarComponent {
         throw new Error(error);
       },
     });
-
-    // this.curarService.enfermar(userToken!, newXuxeData).subscribe({
-    //   next: () => {
-    //     // alert('Se ha curado');
-    //     // this.getEnfermos();
-    //   },
-    //   error: (error) => {
-    //     alert('No se quiere enfermar.');
-    //     throw new Error(error);
-    //   },
-    // });
-
   }
 
   /**

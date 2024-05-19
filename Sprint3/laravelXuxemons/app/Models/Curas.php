@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Curas extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre',
+        'categoria',
+        'archivo'
+    ];
 }

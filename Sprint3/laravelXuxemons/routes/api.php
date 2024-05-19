@@ -15,6 +15,7 @@ Route::post('/xuxemons/pc/random', [XuxemonsUserController::class, 'debug']);
 // Mostrar todos los xuxemons , xuxemons del usuario y sus favoritos //
 Route::get('/xuxemons', [XuxemonsController::class, 'show']);
 Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show']);
+Route::get('/xuxemonsUserActivos/{userId}', [XuxemonsUserController::class, 'showActivos']);
 // Actualización de Xuxemon //
 Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'update']);
 Route::post('/xuxemons/activo', [XuxemonsUserController::class, 'updateActivo']);
@@ -28,6 +29,7 @@ Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 Route::put('/xuxemons/tamano', [XuxemonsController::class, 'updateTam']);
 Route::put('/xuxemons/evos', [XuxemonsController::class, 'updateEvo1']);
 Route::put('/xuxemons/evos2', [XuxemonsController::class, 'updateEvo2']);
+Route::put('/chuches/maximas', [ChuchesUserController::class, 'updateChuchesMax']);
 // Actualizar alimentos xuxemon usuario //
 Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimentar']);
 // ---------------------- //
@@ -35,7 +37,7 @@ Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimenta
 
 // Rutas para las chuches //
 // Crear chuches aleatorias //
-Route::post('/chuches/random', [ChuchesUserController::class, 'debug']);
+Route::post('/chuches/random', [ChuchesUserController::class, 'reclamarDiarias']);
 // Mostrar todas las xuxes del usuario //
 Route::get('/chuchesUser/{userId}', [ChuchesUserController::class, 'show']);
 // ---------------------- //
@@ -47,30 +49,7 @@ Route::post('/login', [Controller::class, 'login']);
 // ---------------------- //
 // ---------------------- //
 
-
-
-
-
-
-
-
-
-// Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimentar']);
-
-
-// Mostrar todos los xuxemons del usuario //
-Route::get('/xuxemonsUserActivos/{userId}', [XuxemonsUserController::class, 'showActivos']);
+// Rutas para el inventario // 
+Route::get('/inventario', [Controller::class, 'inventario']);
 // ---------------------- //
 // ---------------------- //
-
-Route::get('/curas', [ChuchesUserController::class, 'showCuras']);
-
-
-Route::put('/activar/horario/{userId}', [ChuchesUserController::class, 'ReclamarHorario']);
-Route::get('/horario/show/{userId}', [ChuchesUserController::class, 'showHorario']);
-// Crear chuches aleatorias //
-Route::post('/chuches/horario/{userId}', [ChuchesUserController::class, 'horario']);
-
-// ---------------------- //
-// ---------------------- //
-

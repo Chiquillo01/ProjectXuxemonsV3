@@ -13,7 +13,6 @@ return new class extends Migration {
         Schema::create('enfermedades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->default(10);
-            $table->boolean('efecto')->default(false);
             $table->timestamps();
         });
     }

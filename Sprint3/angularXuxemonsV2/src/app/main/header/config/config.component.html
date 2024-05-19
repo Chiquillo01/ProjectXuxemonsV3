@@ -27,5 +27,13 @@
 
             <button class="boton" type="submit" [disabled]="!configEvo2.valid">Actualizar Valores</button>
         </form>
+
+        <form class="tamanioFormStyle" [formGroup]="chuchesDia" (ngSubmit)="editarChuchesDia()">
+            <h2>Chuches maximas por dia</h2>
+
+            <input formControlName="chuches" type="number" placeholder="Modificar las chuches máximas por dia"><br>
+
+            <button class="boton" type="submit" [disabled]="!chuchesDia.valid">Actualizar Valores</button>
+        </form>
     </div>
 </body>

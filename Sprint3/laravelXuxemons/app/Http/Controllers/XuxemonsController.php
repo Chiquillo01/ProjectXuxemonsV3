@@ -155,6 +155,14 @@ class XuxemonsController extends Controller
         try {
             $evolucion = $request->input('evolucion.evo1');
 
+            // Obtener el valor actual de evo2
+            $evo2 = Xuxemons::query()->value('evo2');
+
+            // Validar que evo1 no sea mayor que evo2
+            if ($evolucion > $evo2) {
+                return response()->json(['message' => 'Evo1 no puede ser mayor que Evo2'], 400);
+            }
+
             DB::transaction(function () use ($evolucion) {
                 Xuxemons::query()->update(['evo1' => $evolucion]);
             });
@@ -175,6 +183,14 @@ class XuxemonsController extends Controller
     {
         try {
             $evolucion = $request->input('evolucion.evo2');
+
+            // Obtener el valor actual de evo1
+            $evo1 = Xuxemons::query()->value('evo1');
+
+            // Validar que evo1 no sea mayor que evo2
+            if ($evolucion < $evo1) {
+                return response()->json(['message' => 'Evo2 no puede ser más pequeño que Evo2'], 400);
+            }
 
             DB::transaction(function () use ($evolucion) {
                 Xuxemons::query()->update(['evo2' => $evolucion]);

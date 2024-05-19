@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CurasSeed extends Seeder
+class EnfermedadesSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,23 +14,15 @@ class CurasSeed extends Seeder
     public function run(): void
     {
         $nombres = [
-            'Xocolatina',
-            'Inxulina',
-            'Xal de frutas'
-        ];
-
-        $url = [
-            'syringe.png',
-            'medicine.png',
-            'sugar.png'
+            'Bajon de azucar',
+            'Sobredosis de azucar',
+            'Atracon'
         ];
 
         for ($i = 0; $i < count($nombres); $i++) {
 
-            DB::table('curas')->insert([
+            DB::table('enfermedades')->insert([
                 'nombre' => $nombres[$i],
-                'categoria' => 'curacion',
-                'archivo' => strtolower($url[$i]),
             ]);
         }
     }

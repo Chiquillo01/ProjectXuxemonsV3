@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CurasSeed::class);
         $this->call(CuchesAdmin::class);
         $this->call(XuxemonsAdmin::class);
+        $this->call(EnfermedadesSeed::class);
     }
 }

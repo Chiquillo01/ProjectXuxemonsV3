@@ -3,6 +3,7 @@ import { Observable, catchError, map } from 'rxjs';
 import { TokenService } from '../token/token.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Curas } from '../../models/curas/curas.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,16 @@ export class UsersService {
     } else {
       return true;
     }
+  }
+
+  /* --- Recojer los items --- */
+  /* ---------------------------- */
+  /**
+   * Nombre: getAllInvertario
+   * Función: Realizar la solicitud HTTP GET para obtener todos los items del juego
+   * @returns Un observable que emite un arreglo de los items
+   */
+  getAllInvertario(): Observable<Curas[]> {
+    return this.http.get<Curas[]>('http://127.0.0.1:8000/api/inventario');
   }
 }

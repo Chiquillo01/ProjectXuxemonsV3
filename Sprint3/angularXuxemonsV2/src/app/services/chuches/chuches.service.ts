@@ -70,21 +70,8 @@ export class ChuchesService {
     const body = {
       token: userToken
     };
-
     return this.http.post<any>(
       'http://127.0.0.1:8000/api/chuches/random', body
-    );
-  }
-
-  horario(userToken: string): Observable<any> {
-    const authToken = this.tokenService.getToken();
-    const headers = {
-      headers: { Authorization: `Bearer ${authToken}` },
-    };
-
-    return this.http.post<any>(
-      `http://127.0.0.1:8000/api/chuches/horario/${userToken}`,
-      headers
     );
   }
 
@@ -105,16 +92,20 @@ export class ChuchesService {
     );
   }
 
-  // chucheUpdate(stack: number, id: any): Observable<any> {
-  //   // Token de sesion //
-  //   const authToken = this.tokenService.getToken();
-  //   // Header con el token //
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${authToken}`,
-  //   });
-  //   // Peticion con headers de actualizacion //
-  //   return this.http.put(`http://127.0.0.1:8000/api/chuches/${id}`, { stack: stack }, {
-  //     headers,
-  //   });
-  // }
+  /* --- Configuraciones del admin --- */
+  /* --------------------------------- */
+  /**
+   * Nombre: confChuchesDia
+   * Función: Función para actualizar las chuches maximas por defecto a pedir al dia
+   * @returns Un observable que emite la respuesta de la solicitud HTTP.
+   */
+  confChuchesDia(chuches: any): Observable<any> {
+    const body = {
+      newChuchesMax: chuches
+    };
+
+    return this.http.put(
+      'http://127.0.0.1:8000/api/chuches/maximas', body
+    );
+  }
 }

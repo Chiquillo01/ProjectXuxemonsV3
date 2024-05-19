@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('curas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('enfermedad');
+            $table->string('categoria');
             $table->string('archivo');
             $table->timestamps();
         });

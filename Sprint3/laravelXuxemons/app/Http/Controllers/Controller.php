@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 // Imports agregador //
 use App\Models\User;
+use App\Models\Curas;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -102,6 +103,23 @@ class Controller extends BaseController
             }
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Nombre: login
+     * Función: Valida los datos del body e intenta hacer el inicio de sesión
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function inventario(Request $request)
+    {
+        try {
+            $curas = Curas::all();
+
+            return response()->json([$curas, 200]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al retornar las curas disponibles: ' . $e->getMessage()], 500);
         }
     }
 }

@@ -1,1 +1,33 @@
-<p>objetos works!</p>
+<body>
+    <div class="container">
+        <div class="primerDiv">
+            <div class="pagination">
+                <a (click)="prevPage()" [class.disabled]="currentPage === 1">
+                    <img class="flechitas f1" src="./../../../../assets/home/Xuxemons/flechitas.png" alt="Atras">
+                </a>
+                <span class="paginasItems">Página {{currentPage}}</span>
+                <a (click)="nextPage()" [class.disabled]="getCurrentPagItems().length < this.itemsPerPage">
+                    <img class="flechitas" src="./../../../../assets/home/Xuxemons/flechitas.png" alt="Siguiente">
+                </a>
+            </div>
+
+            <select class="select-css" [(ngModel)]="categoria">
+                <option value="">Categoria</option>
+                <option *ngFor="let categoria of conseguirCategorias()" [value]="categoria">{{categoria}}</option>
+            </select>
+        </div>
+        <!-- //////////////////////////////////////// -->
+
+        <div class="list-container">
+            <div class="card-flex" *ngFor="let card of getCurrentPagItems()" [ngStyle]="getStyle(card.categoria)">
+                <h3 class="card-title">
+                    {{card.nombre}}
+                </h3>
+
+                <div class="imgFormat">
+                    <img [src]="'../assets/home/objetos/' + card.archivo" [attr.alt]="card.nombre">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

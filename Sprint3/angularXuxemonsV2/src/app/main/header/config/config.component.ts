@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 // Imports agregados //
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { XuxemonsService } from '../../../services/xuxemons/xuxemons.service';
+import { ChuchesService } from '../../../services/chuches/chuches.service';
 
 @Component({
   selector: 'app-config',
@@ -12,10 +13,12 @@ export class ConfigComponent {
   configTam: FormGroup;
   configEvo: FormGroup;
   configEvo2: FormGroup;
+  chuchesDia: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private xuxemonsService: XuxemonsService
+    private xuxemonsService: XuxemonsService,
+    private chuchesService: ChuchesService
   ) {
     this.configTam = this.fb.group({
       tamano: ['', [Validators.required]],
@@ -25,6 +28,9 @@ export class ConfigComponent {
     });
     this.configEvo2 = this.fb.group({
       evo2: ['', [Validators.required]],
+    });
+    this.chuchesDia = this.fb.group({
+      chuches: ['', [Validators.required]],
     });
   }
 
@@ -37,8 +43,8 @@ export class ConfigComponent {
       next: () => {
         alert('Tamaño por defecto de los Xuxemnos actualizado con exito rotundo.');
       },
-      error: () => {
-        alert('Fallo estrepitoso al actualizar el tamaño por defecto');
+      error: (error) => {
+        window.alert(JSON.stringify(error));
       }
     });
   }
@@ -52,8 +58,9 @@ export class ConfigComponent {
       next: () => {
         alert('Evos actualizado con exito rotundo.');
       },
-      error: () => {
-        alert('Fallo estrepitoso al actualizar las eevoluciones  por defecto');
+      error: (error) => {
+        console.log(error);
+        //window.alert(JSON.stringify(error));
       }
     });
   }
@@ -67,8 +74,24 @@ export class ConfigComponent {
       next: () => {
         alert('Evos actualizado con exito rotundo.');
       },
-      error: () => {
-        alert('Fallo estrepitoso al actualizar las eevoluciones  por defecto');
+      error: (error) => {
+        console.log(error);
+        // window.alert(JSON.stringify(error));
+      }
+    });
+  }
+
+  /**
+   * Nombre: editarChuchesDia
+   * Función: Envia la información necesaria al servicio especificado 
+   */
+  editarChuchesDia() {
+    this.chuchesService.confChuchesDia(this.chuchesDia.value).subscribe({
+      next: () => {
+        alert('Chuches máximas al dia actualizadas');
+      },
+      error: (error) => {
+        window.alert(JSON.stringify(error));
       }
     });
   }

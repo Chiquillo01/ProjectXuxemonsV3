@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('horario', function (Blueprint $table) {
             $table->id();
-            $table->string('chuche_maximas', 3)->default(10);
+            $table->string('chuche_maximas')->default(10);
             $table->boolean('debug')->default(true);
             $table->unsignedBigInteger('id_users');
             $table->date('date_debug');
+            $table->date('last_claim_date')->nullable();
             $table->timestamps();
 
             // Definir las claves foráneas

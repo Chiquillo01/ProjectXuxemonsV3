@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 // Imports //
-use App\Models\ChuchesUser;
-use App\Models\Chuches;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Chuches;
+use App\Models\ChuchesUser;
+use App\Models\Horario;
+use Carbon\Carbon;
+use DB;
 
 class ChuchesUserController extends Controller
 {
@@ -18,8 +20,7 @@ class ChuchesUserController extends Controller
      */
     public static function obtenerChucheAleatoria()
     {
-        $chucheAleatoria = Chuches::inRandomOrder()->first();
-        return $chucheAleatoria ? $chucheAleatoria->id : null;
+        return DB::table('chuches')->inRandomOrder()->first()->id;
     }
 
     /**
@@ -28,40 +29,61 @@ class ChuchesUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function debug(Request $request)
+    public function reclamarDiarias(Request $request)
     {
         try {
-            $chuchesCreadas = [];
             $userToken = $request->input('token');
 
             $user = User::where('remember_token', $userToken)
-                ->pluck('id')
                 ->first();
 
-            $userId = $user;
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado.'], 404);
+            }
 
-            // Obtener el número máximo de chuches a crear
-            $numeroChuches = 10;
+            $userId = $user->id;
+            $today = Carbon::today()->toDateString();
+
+            // Verificar si el usuario ya reclamó sus chuches hoy
+            $horario = Horario::where('id_users', $userId)->first();
+
+            if ($horario && $horario->last_claim_date == $today) {
+                return response()->json(['message' => 'Ya has reclamado tus chuches marrano.'], 403);
+            }
+
+            // Registrar la reclamación diaria
+            if ($horario) {
+                $horario->last_claim_date = $today;
+                $horario->save();
+            } else {
+                Horario::create([
+                    'id_users' => $userId,
+                    'chuche_maximas' => 10,
+                    'debug' => true,
+                    'date_debug' => now(),
+                    'last_claim_date' => $today,
+                ]);
+            }
+
+            // Obtener el número máximo de chuches a crear desde la tabla horario
+            $numeroChuches = $horario ? $horario->chuche_maximas : 10;
+            $chuchesCreadas = [];
 
             for ($i = 0; $i < $numeroChuches; $i++) {
-                // Obtener una chuche aleatoria
-                $chucheAleatoria = self::obtenerChucheAleatoria();
+                $chucheAleatoria = $this->obtenerChucheAleatoria();
 
                 if (!$chucheAleatoria) {
                     return response()->json(['message' => 'No se pudo encontrar una chuche aleatoria.'], 404);
                 }
 
-                // Verificar si el usuario ya tiene esta chuche
                 $chucheExistente = ChuchesUser::where('user_id', $userId)
                     ->where('chuche_id', $chucheAleatoria)
                     ->first();
 
                 if ($chucheExistente) {
-                    // Incrementar el valor de stack en 1
                     $chucheExistente->stack += 1;
                     $chucheExistente->save();
                 } else {
-                    // Crear un nuevo ChuchesUser
                     $nuevaChucheUsuario = new ChuchesUser();
                     $nuevaChucheUsuario->chuche_id = $chucheAleatoria;
                     $nuevaChucheUsuario->user_id = $userId;
@@ -69,9 +91,9 @@ class ChuchesUserController extends Controller
                     $nuevaChucheUsuario->save();
                 }
 
-                // Agregar la chuche creada al array
                 $chuchesCreadas[] = $chucheAleatoria;
             }
+
             return response()->json(['message' => 'Chuches añadidas con éxito', 'chuches' => $chuchesCreadas], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al crear la chuche aleatoria: ' . $e->getMessage()], 500);
@@ -117,6 +139,28 @@ class ChuchesUserController extends Controller
 
             // Retorna error
             return response()->json(['message' => 'Ha ocurrido un error al actualizar las chuches: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Nombre: updateChuchesMax
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateChuchesMax(Request $request)
+    {
+        try {
+            $chuches = $request->input('newChuchesMax.chuches');
+
+            DB::transaction(function () use ($chuches) {
+                Horario::query()->update(['chuche_maximas' => $chuches]);
+            });
+
+            return response()->json(['message' => 'Se ha actualizado el valor máximo de chuches al dia'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar las chuches máximas: ' . $e->getMessage()], 500);
         }
     }
 
