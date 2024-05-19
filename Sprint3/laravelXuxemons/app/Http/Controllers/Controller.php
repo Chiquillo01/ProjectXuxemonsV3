@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 // Imports agregador //
 use App\Models\User;
 use App\Models\Curas;
+use App\Models\XuxemonsUser;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -107,8 +108,8 @@ class Controller extends BaseController
     }
 
     /**
-     * Nombre: login
-     * Función: Valida los datos del body e intenta hacer el inicio de sesión
+     * Nombre: inventario
+     * Función: recoje todos los valores que hay en la bd de curas
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -120,6 +121,40 @@ class Controller extends BaseController
             return response()->json([$curas, 200]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al retornar las curas disponibles: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Nombre: hospital
+     * Función: a partir del usuario enviado recoje todos sus xuxemon que esten enfermos
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function hospital(Request $request, $userToken)
+    {
+        try {
+            $user = User::where('remember_token', $userToken)->first();
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
+            }
+
+            $xuxemonsEnfermos = XuxemonsUser::where('user_id', $user->id)
+                ->where('enfermo', true)
+                ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->select(
+                    'xuxemons_users.*',
+                    'xuxemons.nombre',
+                    'xuxemons.tipo',
+                )
+                ->get();
+
+            if ($xuxemonsEnfermos->isEmpty()) {
+                return response()->json(['message' => 'No hay Xuxemons enfermos'], 200);
+            }
+
+            return response()->json(['xuxemonsEnfermos' => $xuxemonsEnfermos], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al obtener los Xuxemons enfermos: ' . $e->getMessage()], 500);
         }
     }
 }

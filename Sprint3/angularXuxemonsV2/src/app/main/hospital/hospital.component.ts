@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { XuxemonsUsers } from '../../models/xuxemons/xuxemons-user.model';
+import { Hospital } from '../../models/hospital/hospital.model';
+import { UsersService } from '../../services/users/users.service';
 import { TokenService } from '../../services/token/token.service';
-import { XuxemonsService } from '../../services/xuxemons/xuxemons.service';
 
 @Component({
   selector: 'app-hospital',
@@ -10,37 +10,32 @@ import { XuxemonsService } from '../../services/xuxemons/xuxemons.service';
   styleUrls: ['./hospital.component.css']
 })
 export class HospitalComponent {
-  xuxemonsUser: XuxemonsUsers[] = [];
+  hospitalizados: Hospital[] = [];
 
   constructor(
     private tokenService: TokenService,
-    private xuxemonsService: XuxemonsService,
+    public userService: UsersService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.getXuxemonsEnfermos();
+    this.updateHospital();
   }
 
   /**
-   * Nombre: getXuxemonsEnfermos
-   * Función: obtiene todos los Xuxemons que son del usuario que esta en sessión
+   * Nombre: updateHospital
+   * Función: obtener todos los Xuxemons del usuario que estan enfermos
    */
-  getXuxemonsEnfermos() {
+  updateHospital() {
     const userToken = this.tokenService.getToken();
-
-    if (userToken !== null) {
-      this.xuxemonsService.getAllXuxemonsEnfermosUser(userToken).subscribe({
-        next: (xuxemonsUser: any) => {
-          this.xuxemonsUser = xuxemonsUser;
-        },
-        error: (error) => {
-          console.error('Error fetching Xuxemons:', error);
-        },
-      });
-    } else {
-      console.error('User ID is null');
-    }
+    this.userService.getAllHospital(userToken!).subscribe({
+      next: (value: any) => {
+        this.hospitalizados = value[0];
+      },
+      error: (error) => {
+        console.error('Error fetching hospitalizados:', error);
+      },
+    });
   }
 
   /**
@@ -51,38 +46,7 @@ export class HospitalComponent {
    */
   curar() {
     this.router.navigate(
-      ['/home/home/inventario/objetos']
+      ['/inventario']
     );
-  }
-
-  /**
-  * Nombre: getImageStyle
-  * Función: Modificar el tamaño de la imagen segun el tamaño del xuxemon
-  * @param tamano
-  * @returns width
-  */
-  getImageStyle(tamano: string): any {
-    let width: number;
-    const paqueno = 50;
-    const mediano = 100;
-    const grande = 150;
-
-    switch (tamano) {
-      case 'pequeno':
-        width = paqueno;
-        break;
-      case 'mediano':
-        width = mediano;
-        break;
-      case 'grande':
-        width = grande;
-        break;
-      default:
-        width = paqueno;
-        break;
-    }
-    return {
-      'width.px': width,
-    };
   }
 }

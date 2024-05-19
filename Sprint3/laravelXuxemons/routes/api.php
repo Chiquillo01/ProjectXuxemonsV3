@@ -49,7 +49,8 @@ Route::post('/login', [Controller::class, 'login']);
 // ---------------------- //
 // ---------------------- //
 
-// Rutas para el inventario // 
+// Rutas para el inventario / hospital // 
 Route::get('/inventario', [Controller::class, 'inventario']);
+Route::get('/hospital/{userToken}', [Controller::class, 'hospital']);
 // ---------------------- //
 // ---------------------- //

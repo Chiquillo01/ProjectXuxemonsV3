@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TokenService } from '../token/token.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Curas } from '../../models/curas/curas.model';
+import { Hospital } from 'src/app/models/hospital/hospital.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,16 @@ export class UsersService {
    */
   getAllInvertario(): Observable<Curas[]> {
     return this.http.get<Curas[]>('http://127.0.0.1:8000/api/inventario');
+  }
+
+  /**
+   * Nombre: getAllHospital
+   * Función: Realizar la solicitud HTTP GET para obtener todos los xuxemons enfermos del usuario
+   * @returns Un observable que emite un arreglo de los items
+   */
+  getAllHospital(userToken: string): Observable<Hospital[]> {
+    return this.http.get<Hospital[]>(
+      `http://127.0.0.1:8000/api/xuxemonsUser/${userToken}`
+    );
   }
 }

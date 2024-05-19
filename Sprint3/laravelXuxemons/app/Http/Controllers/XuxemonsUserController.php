@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\XuxemonsUser;
 use App\Models\ChuchesUser;
+use App\Models\Enfermedad;
 use App\Models\User;
 use App\Models\Xuxemons;
 use Illuminate\Http\Request;
@@ -285,6 +286,7 @@ class XuxemonsUserController extends Controller
                     'chuches.modificador',
                 )
                 ->first();
+
             // ------------- //
             $nuevaComida = $xuxemonInfo->comida + $chucheInfo->modificador;
             DB::transaction(function () use ($userToken, $xuxemon_id, $nuevaComida, $chuche_id) {
@@ -317,9 +319,34 @@ class XuxemonsUserController extends Controller
                 }
             });
             // ------------- //
+            // Lógica para determinar si el Xuxemon enferma
+            // Obtener enfermedades disponibles de en juego
+            $enfermedadesIds = Enfermedad::pluck('id');
+            // Elije si enferma o no
+            //$enferma = (rand(1, 6) === 1);
+            // Si enferma y se tienen enfermedades en la tabla
+            //if ($enferma && $enfermedadesIds->isNotEmpty()) {
+                //Se elije con cual enfermara el xuxemon
+                //$enfermedadId = $enfermedadesIds->random();
+                $atraconId = 1; // solo para pruebas
+                // Actualizar el estado del Xuxemon a enfermo
+                XuxemonsUser::where('user_id', $user->id)
+                    ->where('xuxemon_id', $xuxemon_id)
+                    ->update(['enfermo' => true]);
+
+                // Asignar la enfermedad al Xuxemon
+                DB::table('xuxemons_users_enfermedades')->insert([
+                    'xuxemon_user_id' => $xuxemonInfo->id,
+                    'enfermedad_id' => $atraconId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            //}
+
+
+            // ------------- //
             $cumpleEvo1 = $nuevaComida >= $xuxemonInfo->evo1;
             $cumpleEvo2 = $nuevaComida >= $xuxemonInfo->evo2;
-
             // ------------- //
             return response()->json([
                 'cumpleEvo1' => $cumpleEvo1,
