@@ -62,6 +62,8 @@ export class AlimentarComponent {
         this.getChuches();
       },
       error: (error) => {
+        window.alert(JSON.stringify(error));
+        console.log(error);
         alert('No quiere tu mierda de chuche.');
         throw new Error(error);
       },

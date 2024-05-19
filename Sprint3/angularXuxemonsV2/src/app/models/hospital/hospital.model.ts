@@ -1,6 +1,6 @@
 export interface Hospital {
   nombre: string;
-  tamano: number;
-  tipo: number;
+  tamano: string;
+  tipo: string;
   archivo: string;
 }

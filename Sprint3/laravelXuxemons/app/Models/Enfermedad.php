@@ -11,6 +11,5 @@ class Enfermedad extends Model
 
     protected $fillable = [
         'nombre',
-        'efecto',
     ];
 }

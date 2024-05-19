@@ -11,8 +11,7 @@ export interface XuxemonsUsers {
     activo: number;
     favorito: number;
     enfermo: number;
-    inactivo: boolean;
-    noComer: boolean;
+    enfermedad_id: number;
     created_at: string;
     updated_at: string;
 }

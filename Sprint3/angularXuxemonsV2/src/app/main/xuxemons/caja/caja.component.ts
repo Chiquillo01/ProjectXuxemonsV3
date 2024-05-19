@@ -25,7 +25,6 @@ export class CajaComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private xuxemonsService: XuxemonsService,
-    private curarService: CurarService,
     private router: Router
   ) { }
 
@@ -67,26 +66,6 @@ export class CajaComponent implements OnInit {
       this.xuxemonsService.getAllXuxemonsUserActivos(userToken).subscribe({
         next: (xuxemonsUserActivos: any) => {
           this.xuxemonsUserActivos = xuxemonsUserActivos[0];
-          this.xuxemonsUserActivos.forEach((xuxemonActivo) => {
-            this.enfermedades.forEach((enfermedad) => {
-              if (xuxemonActivo.xuxemon_id === enfermedad.xuxemon_id) {
-                if (enfermedad.enfermedad_id == 1) {
-                  if (enfermedad.infectado) {
-                    xuxemonActivo.noComer = true;
-                  } else {
-                    xuxemonActivo.noComer = false;
-                  }
-                }
-                if (enfermedad.enfermedad_id == 2) {
-                  if (enfermedad.infectado) {
-                    xuxemonActivo.inactivo = true;
-                  } else {
-                    xuxemonActivo.inactivo = false;
-                  }
-                }
-              }
-            });
-          });
         },
         error: (error) => {
           console.error('Error fetching Xuxemons:', error);

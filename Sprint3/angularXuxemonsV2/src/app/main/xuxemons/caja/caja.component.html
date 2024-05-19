@@ -18,12 +18,13 @@
                         [ngStyle]="getImageStyle(cardUser.tamano)">
                 </div>
 
-                <img class="button_upload" src="../../../../assets/xuxemons/iconos/download1.png" alt=""
+                <img *ngIf="cardUser.enfermedad_id !== 1" class="button_upload" src="../../../../assets/xuxemons/iconos/download1.png" alt=""
                     onmouseover="this.src='../../../../assets/xuxemons/iconos/download.gif';"
                     onmouseout="this.src='../../../assets/xuxemons/iconos/download1.png'" (click)="activo(cardUser)">
 
-                <div class="card-header">
-                    <div *ngIf="cardUser.favorito == 0 && !cardUser.enfermo">
+                <!-- Opciones de los botones -->
+                <div class="card-header" *ngIf="!cardUser.enfermo">
+                    <div *ngIf="cardUser.favorito == 0">
                         <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
                             Alimentar
                         </button>
@@ -32,6 +33,16 @@
                             Liberar
                         </button>
                     </div>
+                </div>
+
+                <div class="card-header" *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 1">
+                </div>
+
+                <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3">
+
+                    <button class="btn eliminar-btn" (click)="eliminar(cardUser.xuxemon_id)">
+                        Liberar
+                    </button>
                 </div>
             </div>
         </div>
@@ -83,7 +94,10 @@
                     {{cardUser.tipo}}
                 </h4>
 
-                <div class="imgFormat">
+                <div class="imgFormat" *ngIf="cardUser.enfermo">
+                    <img [src]="'../assets/xuxemons/enf.jpg'" style="width: 120px;">
+                </div>
+                <div class="imgFormat" *ngIf="!cardUser.enfermo">
                     <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
                         [ngStyle]="getImageStyle(cardUser.tamano)">
                 </div>
@@ -96,7 +110,7 @@
 
                 <!-- Diferentes alternativas para el mismo tramo de codigo -->
                 <div class="card-header">
-                    <div *ngIf="cardUser.favorito == 0 && !cardUser.enfermo">
+                    <div *ngIf="!cardUser.enfermo">
                         <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
                             Alimentar
                         </button>
@@ -106,33 +120,16 @@
                         </button>
                     </div>
 
-                    <div *ngIf="cardUser.favorito == 1 && !cardUser.enfermo">
-                        <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
-                            Alimentar
-                        </button>
-                    </div>
-
-                    <div *ngIf="cardUser.enfermo && cardUser.noComer">
+                    <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3">
                         <button class="btn alimentar-btn" (click)="hospital()">
-                            Ir al Hospital
+                            Hospital
                         </button>
 
                         <button class="btn eliminar-btn" (click)="eliminar(cardUser.xuxemon_id)">
                             Liberar
-                        </button>
-                    </div>
-
-                    <div *ngIf="cardUser.enfermo && !cardUser.noComer">
-                        <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
-                            Alimentar
-                        </button>
-
-                        <button class="btn alimentar-btn" (click)="hospital()">
-                            Ir al Hospital
                         </button>
                     </div>
                 </div>
-                <!-- /----------------------------------------/ -->
             </div>
         </div>
     </div>

@@ -16,9 +16,9 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->string('tamano')->default('pequeno');
             $table->integer('comida')->nullable()->default(0);
-            $table->integer('activo')->nullable()->default(false);
-            $table->integer('favorito')->nullable()->default(false);
-            $table->integer('enfermo')->nullable()->default(false);
+            $table->boolean('activo')->nullable()->default(false);
+            $table->boolean('favorito')->nullable()->default(false);
+            $table->boolean('enfermo')->nullable()->default(false);
             $table->timestamps();
 
             // Definir las claves foráneas

@@ -98,7 +98,8 @@ class XuxemonsUserController extends Controller
 
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $xuxemons = XuxemonsUser::where('user_id', $user->id)
-                ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->leftJoin('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->leftJoin('xuxemons_users_enfermedades', 'xuxemons_users.id', '=', 'xuxemons_users_enfermedades.xuxemon_user_id')
                 ->where('xuxemons_users.activo', 0)
                 ->select(
                     'xuxemons_users.*',
@@ -108,6 +109,8 @@ class XuxemonsUserController extends Controller
                     'xuxemons.tipo',
                     'xuxemons.evo1',
                     'xuxemons.evo2',
+                    'xuxemons_users.enfermo',
+                    'xuxemons_users_enfermedades.enfermedad_id'
                 )
                 ->orderBy('xuxemons_users.favorito', 'desc')
                 ->get();
@@ -139,7 +142,8 @@ class XuxemonsUserController extends Controller
 
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $xuxemons = XuxemonsUser::where('user_id', $user->id)
-                ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->leftJoin('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->leftJoin('xuxemons_users_enfermedades', 'xuxemons_users.id', '=', 'xuxemons_users_enfermedades.xuxemon_user_id')
                 ->where('xuxemons_users.activo', 1)
                 ->select(
                     'xuxemons_users.*',
@@ -149,6 +153,7 @@ class XuxemonsUserController extends Controller
                     'xuxemons.tipo',
                     'xuxemons.evo1',
                     'xuxemons.evo2',
+                    'xuxemons_users_enfermedades.enfermedad_id'
                 )
                 ->get();
 
@@ -320,15 +325,13 @@ class XuxemonsUserController extends Controller
             });
             // ------------- //
             // Lógica para determinar si el Xuxemon enferma
-            // Obtener enfermedades disponibles de en juego
+            // Obtener enfermedades disponibles de en juego y si enferma o no
             $enfermedadesIds = Enfermedad::pluck('id');
-            // Elije si enferma o no
-            //$enferma = (rand(1, 6) === 1);
-            // Si enferma y se tienen enfermedades en la tabla
-            //if ($enferma && $enfermedadesIds->isNotEmpty()) {
+            $enferma = (rand(1, 6) === 1);
+
+            if ($enferma && $enfermedadesIds->isNotEmpty()) {
                 //Se elije con cual enfermara el xuxemon
-                //$enfermedadId = $enfermedadesIds->random();
-                $atraconId = 1; // solo para pruebas
+                $enfermedadId = $enfermedadesIds->random();
                 // Actualizar el estado del Xuxemon a enfermo
                 XuxemonsUser::where('user_id', $user->id)
                     ->where('xuxemon_id', $xuxemon_id)
@@ -337,11 +340,11 @@ class XuxemonsUserController extends Controller
                 // Asignar la enfermedad al Xuxemon
                 DB::table('xuxemons_users_enfermedades')->insert([
                     'xuxemon_user_id' => $xuxemonInfo->id,
-                    'enfermedad_id' => $atraconId,
+                    'enfermedad_id' => $enfermedadId,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-            //}
+            }
 
 
             // ------------- //
