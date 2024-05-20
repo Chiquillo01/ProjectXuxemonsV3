@@ -4,7 +4,7 @@ export interface Xuxemons {
     tipo: string;
     archivo: string;
     categoria: string;
-    tamano: number;
+    tamano: string;
     evo1: number;
     evo2: number;
     created_at?: string;

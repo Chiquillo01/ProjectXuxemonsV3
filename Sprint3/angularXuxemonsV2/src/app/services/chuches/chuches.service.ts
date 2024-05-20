@@ -17,6 +17,8 @@ export class ChuchesService {
    * @returns la url de la api
    */
   getAllChuchesUser(userToken: string): Observable<ChuchesUser[]> {
+    console.log(`http://127.0.0.1:8000/api/chuchesUser/${userToken}`);
+    
     return this.http.get<ChuchesUser[]>(
       `http://127.0.0.1:8000/api/chuchesUser/${userToken}`
     );

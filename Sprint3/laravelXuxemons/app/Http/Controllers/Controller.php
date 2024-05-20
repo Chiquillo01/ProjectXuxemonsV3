@@ -108,7 +108,7 @@ class Controller extends BaseController
         }
     }
 
-    public function show($userToken)
+    public function showUser($userToken)
     {
         try {
             // Obtener el usuario a partir del token proporcionado
@@ -177,69 +177,69 @@ class Controller extends BaseController
 
 
     // Método para actualizar un usuario
-    public function update(Request $request, $id)
-    {
-        DB::beginTransaction();
+    // public function update(Request $request, $id)
+    // {
+    //     DB::beginTransaction();
 
-        try {
-            $user = User::find($id);
+    //     try {
+    //         $user = User::find($id);
 
-            if (!$user) {
-                return response()->json(['message' => 'Usuario no encontrado'], 404);
-            }
+    //         if (!$user) {
+    //             return response()->json(['message' => 'Usuario no encontrado'], 404);
+    //         }
 
-            $validatedData = $request->validate([
-                'nick' => ['required', 'min:2', 'max:20'],
-                'email' => ['required', 'email', 'max:50'],
-                'password' => ['nullable', 'min:8', 'max:20', 'confirmed'],
-                'imagen' => ['nullable', 'string'],
-            ]);
+    //         $validatedData = $request->validate([
+    //             'nick' => ['required', 'min:2', 'max:20'],
+    //             'email' => ['required', 'email', 'max:50'],
+    //             'password' => ['nullable', 'min:8', 'max:20', 'confirmed'],
+    //             'imagen' => ['nullable', 'string'],
+    //         ]);
 
-            $user->nick = $validatedData['nick'];
-            $user->email = $validatedData['email'];
+    //         $user->nick = $validatedData['nick'];
+    //         $user->email = $validatedData['email'];
 
-            if (!empty($validatedData['password'])) {
-                $user->password = Hash::make($validatedData['password']);
-            }
+    //         if (!empty($validatedData['password'])) {
+    //             $user->password = Hash::make($validatedData['password']);
+    //         }
 
-            if (!empty($validatedData['imagen'])) {
-                $user->imagen = $validatedData['imagen'];
-            }
+    //         if (!empty($validatedData['imagen'])) {
+    //             $user->imagen = $validatedData['imagen'];
+    //         }
 
-            $user->save();
-            DB::commit();
+    //         $user->save();
+    //         DB::commit();
 
-            return response()->json(['message' => 'Usuario actualizado correctamente'], 200);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar el usuario: ' . $e->getMessage()], 500);
-        }
-    }
+    //         return response()->json(['message' => 'Usuario actualizado correctamente'], 200);
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //         return response()->json(['message' => 'Ha ocurrido un error al actualizar el usuario: ' . $e->getMessage()], 500);
+    //     }
+    // }
 
-    // Método para subir una imagen
-    public function uploadImage(Request $request)
-    {
-        $request->validate([
-            'token' => 'required|string',
-            'imagen' => 'required|string',
-        ]);
+    // // Método para subir una imagen
+    // public function uploadImage(Request $request)
+    // {
+    //     $request->validate([
+    //         'token' => 'required|string',
+    //         'imagen' => 'required|string',
+    //     ]);
 
-        $user = User::where('remember_token', $request->input('token'))->first();
+    //     $user = User::where('remember_token', $request->input('token'))->first();
 
-        if (!$user) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
-        }
+    //     if (!$user) {
+    //         return response()->json(['message' => 'Usuario no encontrado'], 404);
+    //     }
 
-        $image = $request->input('imagen');
-        $imageName = $user->idUser . '_profile_image.png';
-        $imagePath = 'profile_images/' . $imageName;
+    //     $image = $request->input('imagen');
+    //     $imageName = $user->idUser . '_profile_image.png';
+    //     $imagePath = 'profile_images/' . $imageName;
 
-        // Decodificar la imagen y guardarla
-        Storage::disk('public')->put($imagePath, base64_decode($image));
+    //     // Decodificar la imagen y guardarla
+    //     Storage::disk('public')->put($imagePath, base64_decode($image));
 
-        $user->imagen = Storage::url($imagePath);
-        $user->save();
+    //     $user->imagen = Storage::url($imagePath);
+    //     $user->save();
 
-        return response()->json(['message' => 'Imagen subida correctamente', 'image_url' => $user->imagen], 200);
-    }
+    //     return response()->json(['message' => 'Imagen subida correctamente', 'image_url' => $user->imagen], 200);
+    // }
 }

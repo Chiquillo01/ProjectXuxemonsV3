@@ -100,6 +100,8 @@ export class AlimentarComponent {
   accionCumpleEvo2() {
     const newXuxeData = parseInt(this.xuxeData.id);
 
+    console.log(newXuxeData, this.cumpleEvo2);
+
     this.xuxemonsService
       .evolucionarXuxemon2(newXuxeData, this.cumpleEvo2)
       .subscribe({
@@ -107,8 +109,10 @@ export class AlimentarComponent {
           this.router.navigate(['/caja']);
         },
         error: (error) => {
+          console.log(error);
           window.alert(JSON.stringify(error));
           throw new Error(error);
+          // console.log(error);
         },
       });
   }

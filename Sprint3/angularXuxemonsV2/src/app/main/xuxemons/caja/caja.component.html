@@ -1,6 +1,6 @@
 <body>
     <div class="container">
-        <div class="equipo">
+        <div class="equipo" *ngIf="xuxemonsUserActivos.length > 0">
             <div class="title-style">
                 <h3>Equipo</h3>
             </div>
@@ -18,19 +18,16 @@
                         [ngStyle]="getImageStyle(cardUser.tamano)">
                 </div>
 
-                <img *ngIf="cardUser.enfermedad_id !== 1" class="button_upload" src="../../../../assets/xuxemons/iconos/download1.png" alt=""
+                <img *ngIf="cardUser.enfermedad_id !== 1" class="button_upload"
+                    src="../../../../assets/xuxemons/iconos/download1.png" alt=""
                     onmouseover="this.src='../../../../assets/xuxemons/iconos/download.gif';"
                     onmouseout="this.src='../../../assets/xuxemons/iconos/download1.png'" (click)="activo(cardUser)">
 
                 <!-- Opciones de los botones -->
                 <div class="card-header" *ngIf="!cardUser.enfermo">
                     <div *ngIf="cardUser.favorito == 0">
-                        <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
+                        <button class="btn-equipo alimentar-btn" (click)="alimentar(cardUser)">
                             Alimentar
-                        </button>
-
-                        <button class="btn eliminar-btn" (click)="eliminar(cardUser.xuxemon_id)">
-                            Liberar
                         </button>
                     </div>
                 </div>
@@ -103,13 +100,16 @@
                 </div>
 
                 <a>
+                    <h4  class="card-title" *ngIf="cardUser.tamano == 'pequeno'">Tamaño: Pequeño</h4>
+                    <h4  class="card-title" *ngIf="cardUser.tamano == 'mediano'">Tamaño: Mediano</h4>
+                    <h4  class="card-title" *ngIf="cardUser.tamano == 'grande'">Tamaño: Grande</h4>
                     <img class="button_upload" src="../../../../assets/xuxemons/iconos/upload1.png" alt=""
                         onmouseover="this.src='../../../../assets/xuxemons/iconos/upload.gif';"
                         onmouseout="this.src='../../../assets/xuxemons/iconos/upload1.png'" (click)="activo(cardUser)">
                 </a>
 
                 <!-- Diferentes alternativas para el mismo tramo de codigo -->
-                <div class="card-header">
+                <div class="card-header" *ngIf="!cardUser.favorito">
                     <div *ngIf="!cardUser.enfermo">
                         <button class="btn alimentar-btn" (click)="alimentar(cardUser)">
                             Alimentar
@@ -120,6 +120,7 @@
                         </button>
                     </div>
 
+                    <!-- alternativa si esta enfermo -->
                     <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3">
                         <button class="btn alimentar-btn" (click)="hospital()">
                             Hospital
@@ -130,6 +131,24 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- alternativa si el xuxemon esta en favoritos -->
+                <div class="card-header" *ngIf="cardUser.favorito">
+                    <div *ngIf="!cardUser.enfermo">
+                        <button class="btn-equipo alimentar-btn" (click)="alimentar(cardUser)">
+                            Alimentar
+                        </button>
+                    </div>
+
+                    <!-- alternativa si esta enfermo -->
+                    <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3">
+                        <button class="btn-equipo alimentar-btn" (click)="hospital()">
+                            Hospital
+                        </button>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

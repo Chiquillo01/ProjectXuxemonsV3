@@ -43,10 +43,26 @@
                         <div class="userSol" *ngIf="request.estado == 1">
                             <img class="imagen" src={{request.imagen}}>
                             <h4 class="nombre">{{ request.nick }}</h4>
-                            <button (click)="acceptar(request.idUser)"><img
-                                    src="../../../assets/contactos/check-mark.png" class="check"></button>
-                            <button (click)="denegar(request.idUser)"><img src="../../../assets/contactos/cross.png"
-                                    class="cross"></button>
+                            <button (click)="acceptar(request.idUser)">
+                                <img class="check">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M20.243 4.757a6 6 0 0 1 .236 8.236l-8.48 8.492l-8.478-8.492a6 6 0 0 1 8.48-8.464a5.998 5.998 0 0 1 8.242.228M5.172 6.172a4 4 0 0 0-.192 5.451L12 18.654l7.02-7.03a4 4 0 0 0-5.646-5.64l-4.202 4.203l-1.415-1.414l2.825-2.827l-.082-.069a4.001 4.001 0 0 0-5.328.295" />
+                                </svg>
+                            </button>
+                            <button (click)="denegar(request.idUser)">
+                                <img class="cross">
+                                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                                    <g>
+                                        <path
+                                            d="M217.36 133.36L128 224l-89.36-90.64a50 50 0 0 1 70.72-70.72L128 80l18.64-17.36a50 50 0 1 1 70.72 70.72"
+                                            opacity="0.2" />
+                                        <path
+                                            d="M223 57a58.1 58.1 0 0 0-82-.06l-13 12.53l-13-12.56a58 58 0 0 0-82 82.05l89.37 90.66a8 8 0 0 0 11.4 0L223 139a58.09 58.09 0 0 0 0-82m-11.36 70.76L128 212.6l-83.71-84.92a42 42 0 1 1 59.41-59.4l.1.1l12.67 12.19l-10 9.65a8 8 0 0 0-.11 11.42L132.69 128l-10.35 10.35a8 8 0 0 0 11.32 11.32l16-16a8 8 0 0 0 0-11.31l-26.24-26.27l28.78-27.71l.11-.1a42 42 0 1 1 59.37 59.44Z" />
+                                    </g>
+                                </svg>
+                            </button>
+                                                      
                         </div>
                     </div>
                 </div>

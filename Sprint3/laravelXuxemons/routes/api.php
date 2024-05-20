@@ -15,11 +15,11 @@ use App\Http\Controllers\IntercambioController;
 Route::post('/xuxemons', [XuxemonsController::class, 'crearXuxemon']);
 Route::post('/xuxemons/pc/random', [XuxemonsUserController::class, 'debug']);
 // Mostrar todos los xuxemons , xuxemons del usuario y sus favoritos //
-Route::get('/xuxemons', [XuxemonsController::class, 'show']);
+Route::get('/xuxemons', [XuxemonsController::class, 'showXuxemons']);
 Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show']);
 Route::get('/xuxemonsUserActivos/{userId}', [XuxemonsUserController::class, 'showActivos']);
 // Actualización de Xuxemon //
-Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'update']);
+Route::put('/xuxemons/actualizar', [XuxemonsController::class, 'updateXuxemons']);
 Route::post('/xuxemons/activo', [XuxemonsUserController::class, 'updateActivo']);
 Route::post('/xuxemons/favorito', [XuxemonsUserController::class, 'updateFav']);
 // Evolucionar al Xuxemon correspondiente //
@@ -48,16 +48,16 @@ Route::get('/xuxemons/curarEnv3', [XuxemonsUserController::class, 'curarEnv3']);
 // Crear chuches aleatorias //
 Route::post('/chuches/random', [ChuchesUserController::class, 'reclamarDiarias']);
 // Mostrar todas las xuxes del usuario //
-Route::get('/chuchesUser/{userId}', [ChuchesUserController::class, 'show']);
+Route::get('/chuchesUser/{userId}', [ChuchesUserController::class, 'showChuches']);
 // ---------------------- //
 // ---------------------- //
 
 // Rutas del usuario Usuario // 
 Route::post('/register', [Controller::class, 'register']);
 Route::post('/login', [Controller::class, 'login']);
-Route::get('/usuario/{userToken}', [Controller::class, 'show']);
-Route::put('/updateUsuario/{id}', [Controller::class, 'update']);
-Route::post('/subirImagen', [Controller::class, 'uploadImage']);
+Route::get('/usuario/{userToken}', [Controller::class, 'showUser']);
+// Route::put('/updateUsuario/{id}', [Controller::class, 'update']);
+// Route::post('/subirImagen', [Controller::class, 'uploadImage']);
 // ---------------------- //
 // ---------------------- //
 

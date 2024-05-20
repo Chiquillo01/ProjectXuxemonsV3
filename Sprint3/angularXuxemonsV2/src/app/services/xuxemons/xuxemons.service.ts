@@ -171,6 +171,8 @@ export class XuxemonsService {
       chuche_id: chuche_id
     };
 
+    console.log('http://127.0.0.1:8000/api/xuxemons/alimentar/user/', body);
+
     return this.http.put(
       'http://127.0.0.1:8000/api/xuxemons/alimentar/user', body
     );
@@ -202,14 +204,14 @@ export class XuxemonsService {
    * @returns Un observable que emite la respuesta de la solicitud HTTP.
    */
   evolucionarXuxemon2(xuxemonId: number, cumpleEvo2: boolean): Observable<any> {
-    const userToken = this.tokenService.getRole();
-    const authToken = this.tokenService.getToken();
+    const userToken = this.tokenService.getToken();
     const body = {
       userToken: userToken,
-      authToken: authToken,
       xuxemonId: xuxemonId,
       cumpleEvo2: cumpleEvo2
     };
+
+    console.log('http://127.0.0.1:8000/api/xuxemons/evolucionar2', body);
 
     return this.http.put(
       'http://127.0.0.1:8000/api/xuxemons/evolucionar2', body

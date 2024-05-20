@@ -15,7 +15,7 @@ export class XuxedexComponent {
   xuxemons: Xuxemons[] = [];
   userRole: Number | null;
   // Filtro //
-  categoria: string = "";
+  categoria: string = '';
   // Pasar páginas //
   currentPage: number = 1;
   itemsPerPage: number = 10;
@@ -53,15 +53,21 @@ export class XuxedexComponent {
    * Función: consigue las categorias existentes para hacer el filtro
    */
   conseguirCategorias(): string[] {
-    const categorias = this.xuxemons.map(value => value.categoria);
-    return categorias.filter((value: string, idx: number) => categorias.indexOf(value) == idx);
+    const categorias = this.xuxemons.map((value) => value.categoria);
+    return categorias.filter(
+      (value: string, idx: number) => categorias.indexOf(value) == idx
+    );
   }
   /**
    * Nombre: obtenerXuxemonsPorCategoria
    * Función: obtiene las categorias de los xuxemons para poder hacer el filtraje con estas
    */
   obtenerXuxemonsPorCategoria(): Xuxemons[] {
-    return this.xuxemons.filter(value => (value.categoria.toLowerCase()).indexOf(this.categoria.toLowerCase()) != -1);
+    return this.xuxemons.filter(
+      (value) =>
+        value.categoria.toLowerCase().indexOf(this.categoria.toLowerCase()) !=
+        -1
+    );
   }
 
   /**
@@ -97,9 +103,7 @@ export class XuxedexComponent {
         categoria: xuxe.categoria,
       },
     };
-    this.router.navigate(
-      ['/editar'], navigationExtras
-    );
+    this.router.navigate(['/editar'], navigationExtras);
   }
 
   /**
@@ -107,17 +111,20 @@ export class XuxedexComponent {
    * Función: envia el id del xuxemon al service, esto lo hace para saber que xuxemon eliminar
    */
   eliminar($id: any) {
-    this.xuxemonsService.XuxeDelete($id).subscribe({
-      next: () => {
-        this.router.navigate(['/xuxedex']);
-        alert('Xuxemon eliminado con exito.');
-        this.updateXuxemons();
-      },
-      error: (error) => {
-        alert('Ha fallado algo, el Xuxemon no pudo ser eliminado');
-        throw new Error(error);
-      },
-    });
+    if (window.confirm('¿Seguro que lo quieres eliminar?')) {
+      this.xuxemonsService.XuxeDelete($id).subscribe({
+        next: () => {
+          alert('Xuxemon eliminado con éxito.');
+          this.updateXuxemons();
+        },
+        error: (error) => {
+          alert('No se puede eliminar el Xuxemon.');
+          throw new Error(error);
+        },
+      });
+    } else {
+      alert('Eliminación cancelada.');
+    }
   }
 
   /**
@@ -153,15 +160,22 @@ export class XuxedexComponent {
     const tierra = '5px solid rgb(245, 94, 7)';
     const aire = '5px solid rgb(2, 254, 212)';
 
-
     switch (tipo) {
-      case 'Agua': border = agua; break;
-      case 'Tierra': border = tierra; break;
-      case 'Aire': border = aire; break;
-      default: border = '5px solid black'; break;
+      case 'Agua':
+        border = agua;
+        break;
+      case 'Tierra':
+        border = tierra;
+        break;
+      case 'Aire':
+        border = aire;
+        break;
+      default:
+        border = '5px solid black';
+        break;
     }
     return {
-      'border': border,
+      border: border,
     };
   }
 
@@ -172,15 +186,22 @@ export class XuxedexComponent {
     const tierra = 'linear-gradient(to bottom, #EA8A60, #FFFFFF)';
     const aire = 'linear-gradient(to bottom, #81FFF7 , #FFFFFF)';
 
-
     switch (tipo) {
-      case 'Agua': background = agua; break;
-      case 'Tierra': background = tierra; break;
-      case 'Aire': background = aire; break;
-      default: background = 'linear-gradient(to bottom, #ff0000, #FFFFFF);'; break;
+      case 'Agua':
+        background = agua;
+        break;
+      case 'Tierra':
+        background = tierra;
+        break;
+      case 'Aire':
+        background = aire;
+        break;
+      default:
+        background = 'linear-gradient(to bottom, #ff0000, #FFFFFF);';
+        break;
     }
     return {
-      'background': background,
+      background: background,
     };
   }
 
@@ -191,16 +212,22 @@ export class XuxedexComponent {
     const tierra = 'rgb(245, 94, 7)';
     const aire = 'rgb(2, 254, 212)';
 
-
     switch (tipo) {
-      case 'Agua': color = agua; break;
-      case 'Tierra': color = tierra; break;
-      case 'Aire': color = aire; break;
-      default: color = 'black'; break;
+      case 'Agua':
+        color = agua;
+        break;
+      case 'Tierra':
+        color = tierra;
+        break;
+      case 'Aire':
+        color = aire;
+        break;
+      default:
+        color = 'black';
+        break;
     }
     return {
-      'color': color,
+      color: color,
     };
   }
 }
-

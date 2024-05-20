@@ -64,7 +64,8 @@ export class ChuchesComponent implements OnInit {
         },
         error: (error) => {
           console.log(error)
-          window.alert(JSON.stringify(error));
+          alert("Ya has reclamado tus chuches marrano.");
+          // window.alert(JSON.stringify(error));
         },
       });
     } else {

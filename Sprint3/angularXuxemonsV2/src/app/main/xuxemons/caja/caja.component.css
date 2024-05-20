@@ -147,6 +147,16 @@
     height: auto;
 }
 
+.btn-equipo{
+    color: black;
+    background: none;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+    height: auto;
+}
+
 .alimentar-btn:hover {
     color: rgb(100, 255, 126);
 }

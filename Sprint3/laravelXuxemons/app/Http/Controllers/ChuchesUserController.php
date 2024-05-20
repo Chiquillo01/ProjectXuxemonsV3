@@ -9,7 +9,7 @@ use App\Models\Chuches;
 use App\Models\ChuchesUser;
 use App\Models\Horario;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ChuchesUserController extends Controller
 {
@@ -104,9 +104,19 @@ class ChuchesUserController extends Controller
      * Nombre: show
      * Función: Enviar los datos para que se muestren en el frontend
      */
-    public function show(Request $request, $userId)
+    public function showChuches($userToken)
     {
         try {
+
+            $user = User::where('remember_token', $userToken)
+                ->first();
+
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado.'], 404);
+            }
+
+            $userId = $user->id;
+
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $chuches = ChuchesUser::where('user_id', $userId)
                 ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')

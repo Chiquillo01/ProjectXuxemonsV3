@@ -18,7 +18,7 @@ label,
 h3,
 .imgHeader,
 .crearB,
-.evolutionBtn,
+.evolutionBtn, 
 .homeText {
     font-family: 'Gay';
     letter-spacing: 2px;
@@ -33,7 +33,7 @@ li,
     letter-spacing: 1px;
 }
 
-.modificador,
+.modificador, .nombreId,
 .staks {
     font-family: 'Pok';
     letter-spacing: 1px;

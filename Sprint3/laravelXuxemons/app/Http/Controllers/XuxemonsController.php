@@ -43,7 +43,7 @@ class XuxemonsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Xuxemons $xuxemons)
+    public function showXuxemons(Xuxemons $xuxemons)
     {
         try {
             $xuxemons = Xuxemons::all();
@@ -63,7 +63,7 @@ class XuxemonsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request)
+    public function updateXuxemons(Request $request)
     {
         try {
             $id_Xuxemon = $request->input('id_Xuxemon');

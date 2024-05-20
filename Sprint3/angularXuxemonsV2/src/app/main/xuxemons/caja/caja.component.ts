@@ -29,7 +29,6 @@ export class CajaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getEnfermedades();
     this.getXuxemons();
     this.getXuxemonsActivos();
   }
@@ -311,32 +310,6 @@ export class CajaComponent implements OnInit {
   }
 
   /**
-   * Nombre: alimentarXuxemon
-   * Función: para editar el Xuxemon
-   */
-  getEnfermedades() {
-    // const userToken = this.tokenService.getToken();
-    // // const enfId = this.curaId;
-    // // console.log(enfId);
-
-    // if (userToken !== null) {
-    //   this.curarService.getAllEnfermedades(userToken).subscribe({
-    //     next: (Enfermedades: any) => {
-    //       this.enfermedades = Enfermedades;
-    //       // this.getXuxemons();
-    //       // console.log(this.enfermedades);
-    //       // console.log(Enfermedades);
-    //     },
-    //     error: (error) => {
-    //       console.error('Error obteniendo enfermedades:', error);
-    //     },
-    //   });
-    // } else {
-    //   console.error('User ID is null');
-    // }
-  }
-
-  /**
    * Nombre: favorito
    * Función: Envia los valores necesarios para añadir o quitar al xuxemon
    * seleccionado como favorito
@@ -351,15 +324,20 @@ export class CajaComponent implements OnInit {
    * Función: Eliminar el xuxemon seleccionado
    */
   eliminar(xuxeUser: number) {
-    this.xuxemonsService.XuxeDelete(xuxeUser).subscribe({
-      next: () => {
-        this.getXuxemons();
-        alert('Eliminado con exito.');
-      },
-      error: (error) => {
-        alert('No se quiere ir señor Stak');
-        throw new Error(error);
-      },
-    });
-  }
+    if (window.confirm('¿Seguro que lo quieres eliminar?')) {
+        this.xuxemonsService.XuxeDelete(xuxeUser).subscribe({
+            next: () => {
+                this.getXuxemons();
+                alert('Xuxemon eliminado con éxito.');
+            },
+            error: (error) => {
+                alert('No se puede eliminar el Xuxemon.');
+                throw new Error(error);
+            },
+        });
+    } else {
+        alert('Eliminación cancelada.');
+    }
+}
+
 }
