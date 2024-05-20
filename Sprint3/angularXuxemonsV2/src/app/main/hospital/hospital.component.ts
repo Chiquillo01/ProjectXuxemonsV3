@@ -31,8 +31,6 @@ export class HospitalComponent {
     this.userService.getAllHospital(userToken!).subscribe({
       next: (value: any) => {
         this.hospitalizados = value.xuxemonsEnfermos;
-        console.log(value);
-        console.log(this.hospitalizados);
       },
       error: (error) => {
         console.error('Error fetching hospitalizados:', error);
