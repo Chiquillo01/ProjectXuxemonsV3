@@ -46,9 +46,28 @@ export class UsersService {
     }
   }
 
-  getUsuario(userToken: string): Observable<Users[]> {
+  getUsuario(userToken: string): Observable<Users> {
+
+    return this.http.get<Users>(`http://127.0.0.1:8000/api/usuario/${userToken}`);
+  }
+
+  getUsuarios(userToken: string): Observable<Users[]> {
 
     return this.http.get<Users[]>(`http://127.0.0.1:8000/api/usuario/${userToken}`);
+  }
+
+  saveImage(userToken:string, img: string): Observable<any> {
+    
+    const body = {
+      token: userToken,
+      imagen: img
+    };
+    
+    return this.http.post('http://127.0.0.1:8000/api/subirImagen', img);
+  }
+
+  updateUsuario(user: Users): Observable<any> {
+    return this.http.put(`http://127.0.0.1:8000/api/updateUsuario/${user.id}`, user);
   }
 
   /* --- Recojer los items --- */

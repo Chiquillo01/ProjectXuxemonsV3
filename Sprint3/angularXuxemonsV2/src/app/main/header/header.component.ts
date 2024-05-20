@@ -41,7 +41,7 @@ export class HeaderComponent {
     const userToken = this.tokenService.getToken();
 
     if (userToken) {
-      this.userService.getUsuario(userToken).subscribe({
+      this.userService.getUsuarios(userToken).subscribe({
         next: (user: Users[]) => {
           this.users = user;
         },

@@ -183,7 +183,7 @@ export class ContactosComponent implements OnInit {
     const userToken = this.tokenService.getToken();
 
     if (userToken !== null) {
-      this.UsersService.getUsuario(userToken).subscribe({
+      this.UsersService.getUsuarios(userToken).subscribe({
         next: (user: any[]) => {
           this.User = user;
           this.getRequest();

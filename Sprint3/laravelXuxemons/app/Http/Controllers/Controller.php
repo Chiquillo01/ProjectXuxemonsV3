@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Mockery\Exception;
 
 class Controller extends BaseController
@@ -107,7 +108,8 @@ class Controller extends BaseController
         }
     }
 
-    public function show($userToken){
+    public function show($userToken)
+    {
         try {
             // Obtener el usuario a partir del token proporcionado
             $user = User::where('remember_token', $userToken)->get();
@@ -171,5 +173,73 @@ class Controller extends BaseController
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al obtener los Xuxemons enfermos: ' . $e->getMessage()], 500);
         }
+    }
+
+
+    // Método para actualizar un usuario
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = User::find($id);
+
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
+            }
+
+            $validatedData = $request->validate([
+                'nick' => ['required', 'min:2', 'max:20'],
+                'email' => ['required', 'email', 'max:50'],
+                'password' => ['nullable', 'min:8', 'max:20', 'confirmed'],
+                'imagen' => ['nullable', 'string'],
+            ]);
+
+            $user->nick = $validatedData['nick'];
+            $user->email = $validatedData['email'];
+
+            if (!empty($validatedData['password'])) {
+                $user->password = Hash::make($validatedData['password']);
+            }
+
+            if (!empty($validatedData['imagen'])) {
+                $user->imagen = $validatedData['imagen'];
+            }
+
+            $user->save();
+            DB::commit();
+
+            return response()->json(['message' => 'Usuario actualizado correctamente'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar el usuario: ' . $e->getMessage()], 500);
+        }
+    }
+
+    // Método para subir una imagen
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|string',
+            'imagen' => 'required|string',
+        ]);
+
+        $user = User::where('remember_token', $request->input('token'))->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        $image = $request->input('imagen');
+        $imageName = $user->idUser . '_profile_image.png';
+        $imagePath = 'profile_images/' . $imageName;
+
+        // Decodificar la imagen y guardarla
+        Storage::disk('public')->put($imagePath, base64_decode($image));
+
+        $user->imagen = Storage::url($imagePath);
+        $user->save();
+
+        return response()->json(['message' => 'Imagen subida correctamente', 'image_url' => $user->imagen], 200);
     }
 }
