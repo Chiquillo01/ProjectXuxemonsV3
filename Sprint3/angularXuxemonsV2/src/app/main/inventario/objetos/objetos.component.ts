@@ -80,11 +80,11 @@ export class ObjetosComponent {
     this.userService.curarEnf3(userToken!).subscribe({
       next: (value: any) => {
         console.log(value);
-        window.alert(JSON.stringify(value));
+        window.alert('Todos tus Xuxemons se han currado de ATRACÓN');
       },
       error: (error) => {
         console.error(error);
-        window.alert(JSON.stringify(error));
+        // window.alert(JSON.stringify(error));
       },
     });
   }

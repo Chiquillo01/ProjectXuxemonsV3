@@ -225,4 +225,89 @@ export class IntercambioComponent implements OnInit {
       });
     }
   }
+
+  getStyle(tipo: string) {
+    const borderStyle = this.getBorderStyle(tipo);
+    const backgroundStyle = this.getBackgrounStyle(tipo);
+
+    return Object.assign({}, borderStyle, backgroundStyle);
+  }
+
+  getBorderStyle(tipo: string) {
+    let border: string;
+
+    const agua = '5px solid rgb(9, 91, 243)';
+    const tierra = '5px solid rgb(245, 94, 7)';
+    const aire = '5px solid rgb(2, 254, 212)';
+
+    switch (tipo) {
+      case 'Agua':
+        border = agua;
+        break;
+      case 'Tierra':
+        border = tierra;
+        break;
+      case 'Aire':
+        border = aire;
+        break;
+      default:
+        border = '5px solid black';
+        break;
+    }
+    return {
+      border: border,
+    };
+  }
+
+  getBackgrounStyle(tipo: string) {
+    let background: string;
+
+    const agua = 'linear-gradient(to bottom, #6193EA, #FFFFFF)';
+    const tierra = 'linear-gradient(to bottom, #EA8A60, #FFFFFF)';
+    const aire = 'linear-gradient(to bottom, #81FFF7 , #FFFFFF)';
+
+    switch (tipo) {
+      case 'Agua':
+        background = agua;
+        break;
+      case 'Tierra':
+        background = tierra;
+        break;
+      case 'Aire':
+        background = aire;
+        break;
+      default:
+        background = 'linear-gradient(to bottom, #ff0000, #FFFFFF);';
+        break;
+    }
+    return {
+      background: background,
+    };
+  }
+
+  getTipeStyle(tipo: string) {
+    let color: string;
+
+    const agua = 'rgb(9, 91, 243)';
+    const tierra = 'rgb(245, 94, 7)';
+    const aire = 'rgb(2, 254, 212)';
+
+    switch (tipo) {
+      case 'Agua':
+        color = agua;
+        break;
+      case 'Tierra':
+        color = tierra;
+        break;
+      case 'Aire':
+        color = aire;
+        break;
+      default:
+        color = 'black';
+        break;
+    }
+    return {
+      color: color,
+    };
+  }
 }

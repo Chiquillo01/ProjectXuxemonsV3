@@ -3,7 +3,11 @@
       <button (click)="verOfertas()">Ver Ofertas de intercambio</button>
       <div class="list-container" *ngIf="!Ofertas">
         <h1 class="nombre">Xuxemons: {{User}}</h1>
-        <div class="card-flex" *ngFor="let cardUser of xuxemonsUser">
+
+
+
+
+        <div class="card-flex" *ngFor="let cardUser of xuxemonsUser" [ngStyle]="getStyle(cardUser.tipo)">
           <a (click)="getXuxemon1(cardUser)">
             <div *ngIf="!cardUser.favorito && !cardUser.activo && !cardUser.enfermo">
               <div class="card-header">
@@ -28,9 +32,9 @@
         </div>
       </div>
   
-      <div class="list-container" *ngIf="xuxemon1 && !Ofertas">
+      <div class="list-container" *ngIf="xuxemon1 && !Ofertas" >
         <h1 class="nombre">Xuxemons: otro usuario</h1>
-        <div class="card-flex" *ngFor="let cardUser of xuxemonsOtherUser">
+        <div class="card-flex" *ngFor="let cardUser of xuxemonsOtherUser"  [ngStyle]="getStyle(cardUser.tipo)">
           <a (click)="getXuxemon2(cardUser)">
             <div *ngIf="!cardUser.favorito && !cardUser.activo && !cardUser.enfermo">
               <div class="card-header">
@@ -56,7 +60,7 @@
       </div>
       <div class="list-trade" *ngIf="xuxemon1 && xuxemon2 && !Ofertas">
         <h1 class="nombre">Oferta: </h1>
-        <div class="card-flex">
+        <div class="card-flex" [ngStyle]="getStyle(xuxemon1.tipo)">
           <div>
             <div class="card-header">
               <h3 class="card-title">
@@ -80,7 +84,7 @@
   
         <h1>==</h1>
   
-        <div class="card-flex">
+        <div class="card-flex" [ngStyle]="getStyle(xuxemon2.tipo)">
           <div>
             <div class="card-header">
               <h3 class="card-title">
@@ -109,7 +113,7 @@
       <div class="list-trade" *ngIf="Ofertas && xuxemonOferta1 && xuxemonOferta2">
         <h1 class="nombre">Oferta</h1>
   
-        <div class="card-flex">
+        <div class="card-flex-ofertar" [ngStyle]="getStyle(xuxemonOferta1.tipo)">
           <div>
             <div class="card-header">
               <h3 class="card-title">{{xuxemonOferta1.nombre}}</h3>
@@ -129,7 +133,7 @@
   
         <h1>+=+</h1>
   
-        <div class="card-flex">
+        <div class="card-flex" [ngStyle]="getStyle(xuxemonOferta1.tipo)">
           <div>
             <div class="card-header">
               <h3 class="card-title">{{xuxemonOferta2.nombre}}</h3>

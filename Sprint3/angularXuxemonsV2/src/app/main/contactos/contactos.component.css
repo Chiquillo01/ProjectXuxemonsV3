@@ -152,6 +152,7 @@ button{
     text-overflow: ellipsis;
 }
 .nombreId{
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
     align-content: column;
     justify-content: center;
@@ -200,7 +201,9 @@ button{
     gap: 5px;
     padding: 10px;
     border-radius: 10px;
-    background-color: #353535;
+    background-color: none;
+    border: 8px solid #ffff;
+    margin-bottom: 8px;
     height: 403px;
     overflow-y: scroll;
 }
@@ -218,9 +221,10 @@ button{
 }
 
 .user-name {
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
     font-size: 22px;
-    color: #fff;
+    color: black;
     margin: 0;
     align-items: baseline;
 }
@@ -232,24 +236,28 @@ button{
 }
 
 .message-info {
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
     padding-left: 50px;
 }
 
 .message-text {
-    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
     margin-top: -20px;
 }
 
 .message-time {
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
-    color: #bbb;
+    color: #3c3c3c;
     margin: 0;
     font-size: 12px;
     padding-left: 10px;
 }
 
 .enviarMensaje{
+    font-family: 'Times New Roman', Times, serif;
     background: transparent;
     border: 4px solid rgb(255, 255, 255);
     color: black;

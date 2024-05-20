@@ -326,12 +326,13 @@ class XuxemonsUserController extends Controller
             // ------------- //
             // Lógica para determinar si el Xuxemon enferma
             // Obtener enfermedades disponibles de en juego y si enferma o no
-            $enfermedadesIds = Enfermedad::pluck('id');
-            $enferma = (rand(1, 6) === 1);
+            // $enfermedadesIds = Enfermedad::pluck('id');
+            // $enfermedadesIds = 3;
+            $enferma = (rand(1, 4) === 1);
 
-            if ($enferma && $enfermedadesIds->isNotEmpty()) {
+            if ($enferma) {
                 //Se elije con cual enfermara el xuxemon
-                $enfermedadId = $enfermedadesIds->random();
+                $enfermedadId = 3;
                 // Actualizar el estado del Xuxemon a enfermo
                 XuxemonsUser::where('user_id', $user->id)
                     ->where('xuxemon_id', $xuxemon_id)
