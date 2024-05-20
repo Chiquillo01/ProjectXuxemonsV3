@@ -62,7 +62,6 @@ export class ContactosComponent implements OnInit {
 
     this.getUser();
     this.getRequest();
-    // this.mensajesUsers();
     this.route.queryParams.subscribe((params) => {
       this.otherUserId = {
         id: params['id'],
@@ -80,7 +79,6 @@ export class ContactosComponent implements OnInit {
   openChatUser(idUser: string) {
     this.openChat = true;
     console.log(this.openChat);
-    this.chatVivo(idUser);
     this.getMensajesUsers(idUser);
     this.idUserDos = idUser;
   }
@@ -277,8 +275,6 @@ export class ContactosComponent implements OnInit {
         next: (chat: any[]) => {
           // Cambia any por el tipo correcto si lo conoces
           this.Chat = chat; // Asigna toda la matriz de solicitudes
-          // console.log('Info chat:');
-          // console.log(chat); // Muestra toda la matriz en la consola
         },
         error: (error) => {
           console.error('Error en el chat:', error);
@@ -290,8 +286,6 @@ export class ContactosComponent implements OnInit {
   // Esta función convierte la cadena de mensajes JSON en un objeto JavaScript
   parseMensajes(mensajesString: string): any[] {
     try {
-      // console.log('Mensaje:');
-      // console.log(mensajesString);
       if (!mensajesString) {
         return []; // O devuelve un valor predeterminado adecuado si es necesario
       }
@@ -321,28 +315,12 @@ export class ContactosComponent implements OnInit {
     }
   }
 
-  chatVivo(id2: string) {
-    const userToken = this.tokenService.getToken();
-    // console.log('http://localhost:8000/api/messages', {
-    //   userName: userToken,
-    //   searchUser: id2,
-    // });
-    //la idea es que se muestre primero el historial y luego lo que tu escribes
-    if (userToken) {
-      this.ContactosService.liveChat(userToken, id2).subscribe({
-        next: (response: any) => {
-          this.message = '';
-        },
-      });
-    }
-    // this.ContactosService.liveChat(userToken, texto).subscribe({
-    //   next: (response: any) => {
-    //     this.getMensajesUsers(id2);
-    //   },
-    // });
-  }
-
   intercambio(idUser: string) {
-    this.router.navigate(['/intercambio'], { queryParams: { id: idUser} });
+
+    this.ContactosService.getId(idUser).subscribe({
+      next: (id: any) => {
+        this.router.navigate(['/intercambio'], { queryParams: { id: id} });
+      },
+    });
   }
 }

@@ -12,12 +12,14 @@ export class IntercambioService {
   constructor(private http: HttpClient, public tokenService: TokenService) {}
 
   getUsuario(userToken: string): Observable<Users[]> {
+    console.log(`http://127.0.0.1:8000/api/usuario/${userToken}`);
     return this.http.get<Users[]>(
       `http://127.0.0.1:8000/api/usuario/${userToken}`
     );
   }
 
   getOtherUsuario(idUser: string): Observable<Users[]> {
+    console.log(`http://127.0.0.1:8000/api/otherUsuario/${idUser}`);
     return this.http.get<Users[]>(
       `http://127.0.0.1:8000/api/otherUsuario/${idUser}`
     );
@@ -29,6 +31,7 @@ export class IntercambioService {
    * @returns Un observable que emite un arreglo de XuxemonsUsers
    */
   getAllXuxemonsUser(userToken: string): Observable<XuxemonsUsers[]> {
+    console.log(`http://127.0.0.1:8000/api/xuxemonsUser/${userToken}`);
     return this.http.get<XuxemonsUsers[]>(
       `http://127.0.0.1:8000/api/xuxemonsUser/${userToken}`
     );
@@ -40,6 +43,7 @@ export class IntercambioService {
    * @returns Un observable que emite un arreglo de XuxemonsUsers
    */
   getAllXuxemonsOtherUser(id: string): Observable<XuxemonsUsers[]> {
+    console.log(`http://127.0.0.1:8000/api/xuxemonsOtherUser/${id}`);
     return this.http.get<XuxemonsUsers[]>(
       `http://127.0.0.1:8000/api/xuxemonsOtherUser/${id}`
     );
@@ -51,6 +55,7 @@ export class IntercambioService {
    * @returns Un observable que emite un arreglo de XuxemonsUsers
    */
   getShowTrade(userToken: string): Observable<XuxemonsUsers[]> {
+    console.log(`http://127.0.0.1:8000/api/showTrade/${userToken}`);
     return this.http.get<XuxemonsUsers[]>(
       `http://127.0.0.1:8000/api/showTrade/${userToken}`
     );
@@ -73,6 +78,7 @@ export class IntercambioService {
       xuxemon1: xuxemon1,
       xuxemon2: xuxemon2,
     };
+    console.log(`http://127.0.0.1:8000/api/acceptTrade`, body);
     return this.http.post<XuxemonsUsers[]>(
       `http://127.0.0.1:8000/api/acceptTrade`,
       body
@@ -96,6 +102,7 @@ export class IntercambioService {
       xuxemon1: xuxemon1,
       xuxemon2: xuxemon2,
     };
+    console.log(`http://127.0.0.1:8000/api/trade`, body);
     return this.http.post<XuxemonsUsers[]>(
       `http://127.0.0.1:8000/api/trade`,
       body

@@ -73,6 +73,8 @@ Route::get('/showSolicitudes/{userId}', [ContactosController::class, 'showSolici
 Route::get('/show/{userId}', [ContactosController::class, 'showFriends']);
 // Muestra el chat //
 Route::get('/show/{userToken}/&/{idUser}', [ContactosController::class, 'showChat']);
+// Obtiene el id del usuario para intercambiar cuando se selecciona en contactos //
+Route::get('getId/{idUser}', [ContactosController::class, 'getId']);
 
 // Rutas Intercambio //
 // Mostrar los xuxemons del otro usuario //

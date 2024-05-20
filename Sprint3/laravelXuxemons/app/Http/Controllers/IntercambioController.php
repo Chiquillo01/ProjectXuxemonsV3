@@ -59,7 +59,7 @@ class IntercambioController extends Controller
             // Obtener el token de usuario de la solicitud
             $userToken = $request->input('token');
             // Obtener el token de usuario de la solicitud
-            $tagUser2 = $request->input('iduser2');
+            $idUser2 = $request->input('iduser2');
             // Obtener el token de usuario de la solicitud
             $idXuxemon1 = $request->input('xuxemon1');
             // Obtener el token de usuario de la solicitud
@@ -73,16 +73,7 @@ class IntercambioController extends Controller
                 return response()->json(['message' => 'Usuario no encontrado', $user], 404);
             }
 
-            // Busca el id del usuario autorizado
-            $user2 = User::where('idUser', $tagUser2)
-                ->first();
-            // Si no exixte usuario retornara el error
-            if (!$user2) {
-                return response()->json(['message' => 'Usuario no encontrado', $user], 404);
-            }
-
             $idUser1 = $user->id;
-            $idUser2 = $user2->id;
 
             $Trade = new Intercambio();
             $Trade->user1 = $idUser1;
@@ -121,12 +112,15 @@ class IntercambioController extends Controller
         }
     }
 
+    //funcion que se envia desde la persona que recibe la oferta
+    //por eso se revierte el idUser2 es el que la a mandado = user1
     public function acceptarIntercambio(Request $request)
     {
         try {
             // Obtener los parámetros de la solicitud
             $userToken = $request->input('token');
-            $tagUser2 = $request->input('iduser2');
+            // es el user 1 porque es la parsona que a mandado la oferta
+            $idUser1 = $request->input('iduser2');
             $idXuxemon1 = $request->input('xuxemon1');
             $idXuxemon2 = $request->input('xuxemon2');
 
@@ -137,19 +131,10 @@ class IntercambioController extends Controller
                 return response()->json(['message' => 'Usuario no encontrado'], 404);
             }
 
-            // Busca el id del usuario autorizado
-            $user2 = User::where('idUser', $tagUser2)
-                ->first();
-            // Si no exixte usuario retornara el error
-            if (!$user2) {
-                return response()->json(['message' => 'Usuario no encontrado', $user], 404);
-            }
-
             $idUser2 = $user->id;
-            $idUser = $user2->id;
 
             $Trade = Intercambio::where('user2', $idUser2)
-                ->where('user1', $idUser)
+                ->where('user1', $idUser1)
                 ->where('xuxemon1', $idXuxemon1)
                 ->where('xuxemon2', $idXuxemon2)
                 ->first();
@@ -162,7 +147,7 @@ class IntercambioController extends Controller
             $Trade->save();
 
             $tradeUser2 = XuxemonsUser::where('user_id', $idUser2)->where('xuxemon_id', $idXuxemon2)->first();
-            $tradeUser1 = XuxemonsUser::where('user_id', $idUser)->where('xuxemon_id', $idXuxemon1)->first();
+            $tradeUser1 = XuxemonsUser::where('user_id', $idUser1)->where('xuxemon_id', $idXuxemon1)->first();
 
             // Verifica que se hayan encontrado los registros de XuxemonsUser
             if (!$tradeUser1 || !$tradeUser2) {
@@ -170,8 +155,8 @@ class IntercambioController extends Controller
             }
 
             // Realiza la transacción para intercambiar los Xuxemons
-            DB::transaction(function () use ($tradeUser2, $idUser, $tradeUser1, $idUser2) {
-                $tradeUser2->user_id = $idUser;
+            DB::transaction(function () use ($tradeUser2, $idUser1, $tradeUser1, $idUser2) {
+                $tradeUser2->user_id = $idUser1;
                 $tradeUser2->save();
 
                 $tradeUser1->user_id = $idUser2;
@@ -188,7 +173,9 @@ class IntercambioController extends Controller
         }
     }
 
-    public function xuxemonsIntercambio1($userToken, $tagUser)
+    //funcion que se envia desde la persona que recibe la oferta
+    //por eso se revierte el idUser2 es el que la a mandado = user1
+    public function xuxemonsIntercambio1($userToken, $idUser1)
     {
         try {
             // $userToken = $request->input('token');
@@ -200,16 +187,9 @@ class IntercambioController extends Controller
                 return response()->json(['message' => 'Usuario no encontrado'], 404);
             }
 
-            // Busca el id del usuario autorizado
-            $user2 = User::where('idUser', $tagUser)
-                ->first();
-            // Si no exixte usuario retornara el error
-            if (!$user2) {
-                return response()->json(['message' => 'Usuario no encontrado', $user2], 404);
-            }
             $idUser2 = $user->id;
-            $idUser1 = $user2->id;
-            $infoTrade = Intercambio::where('user2', $idUser2)->where('user1', $idUser1)->first();
+
+            $infoTrade = Intercambio::where('user2', $idUser2)->where('user1', $idUser1)->where('intercambiar', 0)->first();
 
             if (!$infoTrade) {
                 return response()->json(['message' => 'Info trade no encontrado'], 404);
@@ -230,7 +210,7 @@ class IntercambioController extends Controller
                 )->first();
 
             if (!$tradeUser1) {
-                return response()->json(['message' => 'Xuxemon no encontrado para uno de los usuarios'], 404);
+                return response()->json(['message' => 'Xuxemon no encontrado para el usuario1  '. $idUser1.'  '.$idXuxemon1], 404);
             }
 
             return response()->json($tradeUser1, 200);
@@ -239,7 +219,9 @@ class IntercambioController extends Controller
         }
     }
 
-    public function xuxemonsIntercambio2($userToken, $tagUser)
+    //funcion que se envia desde la persona que recibe la oferta
+    //por eso se revierte el idUser2 es el que la a mandado = user1
+    public function xuxemonsIntercambio2($userToken, $idUser1)
     {
         try {
             // $userToken = $request->input('token');
@@ -251,16 +233,9 @@ class IntercambioController extends Controller
                 return response()->json(['message' => 'Usuario no encontrado'], 404);
             }
 
-            // Busca el id del usuario autorizado
-            $user2 = User::where('idUser', $tagUser)
-                ->first();
-            // Si no exixte usuario retornara el error
-            if (!$user2) {
-                return response()->json(['message' => 'Usuario no encontrado', $user2], 404);
-            }
             $idUser2 = $user->id;
-            $idUser1 = $user2->id;
-            $infoTrade = Intercambio::where('user2', $idUser1)->where('user1', $idUser2)->first();
+
+            $infoTrade = Intercambio::where('user2', $idUser2)->where('user1', $idUser1)->where('intercambiar', 0)->first();
 
             if (!$infoTrade) {
                 return response()->json(['message' => 'Info trade no encontrado'], 404);

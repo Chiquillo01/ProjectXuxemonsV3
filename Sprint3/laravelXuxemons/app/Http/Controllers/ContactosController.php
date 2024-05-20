@@ -118,6 +118,24 @@ class ContactosController extends Controller
         }
     }
 
+    public function getId($userId)
+    {
+        try {
+            // Obtener el usuario a partir del token proporcionado
+            $user = User::where('idUser', $userId)->first();
+
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
+            }
+
+            $id = $user->id;
+
+            return response()->json($id, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al retornar la id: ' . $e->getMessage()], 500);
+        }
+    }
+
     public function showSolicitudes($userToken)
     {
         try {

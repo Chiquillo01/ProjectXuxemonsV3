@@ -196,6 +196,8 @@ export class IntercambioComponent implements OnInit {
       ).subscribe({
         next: (xuxemonsUser: any) => {
           this.xuxemonsOtherUser = xuxemonsUser[0];
+          window.alert("Oferta de intercambio enviada");
+          this.router.navigate(['/home'], {} );
         },
         error: (error) => {
           console.error('Error fetching Xuxemons:', error);
@@ -214,7 +216,9 @@ export class IntercambioComponent implements OnInit {
         this.idOtherUser,
         this.xuxemonOferta2.xuxemon_id
       ).subscribe({
-        next: () => {},
+        next: () => {
+          this.router.navigate(['/home'], {} );
+        },
         error: (error) => {
           console.error('Error fetching Xuxemons:', error);
         },
