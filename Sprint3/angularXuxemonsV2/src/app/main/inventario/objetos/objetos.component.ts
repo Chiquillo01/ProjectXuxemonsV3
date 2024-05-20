@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Curas } from '../../../models/curas/curas.model';
 import { UsersService } from '../../../services/users/users.service';
+import { TokenService } from '../../../services/token/token.service';
 
 @Component({
   selector: 'app-objetos',
@@ -16,6 +17,7 @@ export class ObjetosComponent {
   itemsPerPage: number = 10;
 
   constructor(
+    private tokenService: TokenService,
     public userService: UsersService,
   ) {
   }
@@ -35,6 +37,44 @@ export class ObjetosComponent {
       },
       error: (error) => {
         console.error('Error fetching inventori:', error);
+      },
+    });
+  }
+
+  /**
+   * Nombre: E1Curar
+   * Función: curan todas las enfermedades del chuchemon
+   */
+  E1Curar() {
+    const userToken = this.tokenService.getToken();
+    this.userService.curarEnf1(userToken!).subscribe({
+      next: (value: any) => {
+        this.curas = value[0];
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  E2Curar() {
+    const userToken = this.tokenService.getToken();
+    this.userService.curarEnf2(userToken!).subscribe({
+      next: (value: any) => {
+        this.curas = value[0];
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  E3Curar() {
+    const userToken = this.tokenService.getToken();
+    this.userService.curarEnf3(userToken!).subscribe({
+      next: (value: any) => {
+        this.curas = value[0];
+      },
+      error: (error) => {
+        console.error(error);
       },
     });
   }

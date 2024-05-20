@@ -50,49 +50,6 @@ export class ChuchesComponent implements OnInit {
   }
 
   /**
-   * Nombre: getHorario
-   * Función: obtiene la info del horario del usuario
-   */
-  getHorario() {
-    // const userToken = this.tokenService.getToken();
-    // console.log('userToken getHorario: ' + userToken);
-
-    // if (userToken !== null) {
-    //   this.chuchesService.getHorario(userToken).subscribe({
-    //     next: (Horario: any) => {
-    //       this.horario = Horario[0];
-    //     },
-    //     error: (error) => {
-    //       console.error('Error fetching Xuxemons:', error);
-    //     },
-    //   });
-    // } else {
-    //   console.error('User ID is null');
-    // }
-  }
-
-  /**
-   * Nombre: getHorario
-   * Función: obtiene todas las chuches que son del usuario que esta en sessión
-   */
-  activarHorario() {
-    // const userToken = this.tokenService.getToken();
-    // console.log('userToken: ' + userToken);
-    // if (userToken !== null) {
-    //   this.chuchesService.activarHorario(userToken).subscribe({
-    //     next: (Horario: any) => {
-    //       console.log("debug activado ?");
-    //     },
-    //     error: (error) => {
-    //       console.error('Error activando el debug:', error);
-    //     },
-    //   });
-    // } else {
-    //   console.error('User ID is null');
-    // }
-  }
-
-  /**
    * Nombre: debug
    * Función: crea aleatoriamente una chuche pasandole el id del usuario de la sesión habierta.
    * Despues actualizara la lista de chuches del Usuario

@@ -56,13 +56,13 @@ export class UsersService {
     return this.http.get<Users[]>(`http://127.0.0.1:8000/api/usuario/${userToken}`);
   }
 
-  saveImage(userToken:string, img: string): Observable<any> {
-    
+  saveImage(userToken: string, img: string): Observable<any> {
+
     const body = {
       token: userToken,
       imagen: img
     };
-    
+
     return this.http.post('http://127.0.0.1:8000/api/subirImagen', img);
   }
 
@@ -89,6 +89,36 @@ export class UsersService {
   getAllHospital(userToken: string): Observable<Hospital[]> {
     return this.http.get<Hospital[]>(
       `http://127.0.0.1:8000/api/xuxemonsUser/${userToken}`
+    );
+  }
+
+  /**
+   * Nombre: curarEnf?
+   * Función: rutas para curar las enfermedades del xuxemon
+   * @returns Un observable que emite un arreglo de los items
+   */
+  curarEnf1(userToken: string): Observable<any> {
+    const body = {
+      userToken: userToken,
+    };
+
+    return this.http.put('http://127.0.0.1:8000/api/xuxemons/curarEnv1', body
+    );
+  }
+  curarEnf2(userToken: string): Observable<any> {
+    const body = {
+      userToken: userToken,
+    };
+
+    return this.http.put('http://127.0.0.1:8000/api/xuxemons/curarEnv2', body
+    );
+  }
+  curarEnf3(userToken: string): Observable<any> {
+    const body = {
+      userToken: userToken,
+    };
+
+    return this.http.put('http://127.0.0.1:8000/api/xuxemons/curarEnv3', body
     );
   }
 }

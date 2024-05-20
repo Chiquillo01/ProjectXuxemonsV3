@@ -427,4 +427,110 @@ class XuxemonsUserController extends Controller
             return response()->json(['message' => 'Ha ocurrido un error al evolucionar el xuxemon: ' . $e->getMessage()], 500);
         }
     }
+
+    /**
+     * Nombre: curarEnv1
+     * Función: funciones para curar las enfermedades de los xuxemons
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function curarEnv1(Request $request)
+    {
+        $userToken = $request->input('userToken');
+        $user = User::where('remember_token', $userToken)
+            ->first();
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado', $user], 404);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('xuxemons_user')
+                ->where('user_id', $user->id)
+                ->update(['enfermo' => false]);
+
+            // Eliminar los registros de la tabla xuxemon_user_enfermedad
+            DB::table('xuxemons_users_enfermedades')
+                ->where('enfermedad_id', 1)
+                ->where('xuxemon_user_id', $user->id)
+                ->delete();
+
+            // Confirmar la transacción
+            DB::commit();
+
+            return response()->json(['message' => 'Xuxemons curados y registros actualizados correctamente.'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['error' => 'Ocurrió un error al actualizar los registros: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function curarEnv2(Request $request)
+    {
+        $userToken = $request->input('userToken');
+        $user = User::where('remember_token', $userToken)
+            ->first();
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado', $user], 404);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('xuxemons_user')
+                ->where('user_id', $user->id)
+                ->update(['enfermo' => false]);
+
+            // Eliminar los registros de la tabla xuxemon_user_enfermedad
+            DB::table('xuxemons_users_enfermedades')
+                ->where('enfermedad_id', 2)
+                ->where('xuxemon_user_id', $user->id)
+                ->delete();
+
+            // Confirmar la transacción
+            DB::commit();
+
+            return response()->json(['message' => 'Xuxemons curados y registros actualizados correctamente.'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['error' => 'Ocurrió un error al actualizar los registros: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function curarEnv3(Request $request)
+    {
+        $userToken = $request->input('userToken');
+        $user = User::where('remember_token', $userToken)
+            ->first();
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado', $user], 404);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('xuxemons_user')
+                ->where('user_id', $user->id)
+                ->update(['enfermo' => false]);
+
+            // Eliminar los registros de la tabla xuxemon_user_enfermedad
+            DB::table('xuxemons_users_enfermedades')
+                ->where('enfermedad_id', 2)
+                ->where('xuxemon_user_id', $user->id)
+                ->delete();
+
+            // Confirmar la transacción
+            DB::commit();
+
+            return response()->json(['message' => 'Xuxemons curados y registros actualizados correctamente.'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['error' => 'Ocurrió un error al actualizar los registros: ' . $e->getMessage()], 500);
+        }
+    }
+
 }

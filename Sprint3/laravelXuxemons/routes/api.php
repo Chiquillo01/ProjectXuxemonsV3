@@ -37,6 +37,13 @@ Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimenta
 // ---------------------- //
 // ---------------------- //
 
+// Rutas para el inventario / hospital // 
+Route::get('/xuxemons/curarEnv1', [XuxemonsUserController::class, 'curarEnv1']);
+Route::get('/xuxemons/curarEnv2', [XuxemonsUserController::class, 'curarEnv2']);
+Route::get('/xuxemons/curarEnv3', [XuxemonsUserController::class, 'curarEnv3']);
+// ---------------------- //
+// ---------------------- //
+
 // Rutas para las chuches //
 // Crear chuches aleatorias //
 Route::post('/chuches/random', [ChuchesUserController::class, 'reclamarDiarias']);
@@ -83,14 +90,14 @@ Route::get('getId/{idUser}', [ContactosController::class, 'getId']);
 Route::get('/xuxemonsOtherUser/{userId}', [IntercambioController::class, 'showXuxemonsUser']);
 // Mostrar la informacion del otro usuario //
 Route::get('/otherUsuario/{userToken}', [IntercambioController::class, 'showOtherUser']);
-// muestra la informacion del intercambio
+// muestra la informacion del intercambio //
 Route::get('/showTrade/{userToken}', [IntercambioController::class, 'mostrarIntercambio']);
 
-//implementar las rutas en el servicio
+// implementar las rutas en el servicio //
 // Mostrar todos los xuxemons del usuario //
 Route::post('/trade', [IntercambioController::class, 'solicitudIntercambio']);
-// Accepta y intercambia los xuxemons
+// Accepta y intercambia los xuxemons //
 Route::post('/acceptTrade', [IntercambioController::class, 'acceptarIntercambio']);
-// obtiene la informacion de los xuxemosn a tradear
+// obtiene la informacion de los xuxemosn a tradear //
 Route::get('/xuxemonsTrade1/{usertoken}/{idUser}', [IntercambioController::class, 'xuxemonsIntercambio1']);
 Route::get('/xuxemonsTrade2/{usertoken}/{idUser}', [IntercambioController::class, 'xuxemonsIntercambio2']);
