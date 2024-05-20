@@ -1,29 +1,35 @@
 import { Component } from '@angular/core';
 import { Curas } from '../../../models/curas/curas.model';
+import { Hospital } from '../../../models/hospital/hospital.model';
 import { UsersService } from '../../../services/users/users.service';
 import { TokenService } from '../../../services/token/token.service';
+import JSONPRequest from 'pusher-js/types/src/runtimes/web/dom/jsonp_request';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-objetos',
   templateUrl: './objetos.component.html',
-  styleUrls: ['./objetos.component.css']
+  styleUrls: ['./objetos.component.css'],
 })
 export class ObjetosComponent {
   curas: Curas[] = [];
+  hospitalizados: Hospital[] = [];
   // Filtro //
-  categoria: string = "";
+  categoria: string = '';
   // Pasar páginas //
   currentPage: number = 1;
   itemsPerPage: number = 10;
 
+  enfermedad: string | undefined;
+
   constructor(
     private tokenService: TokenService,
-    public userService: UsersService,
-  ) {
-  }
+    public userService: UsersService
+  ) {}
 
   ngOnInit(): void {
     this.updateItems();
+    this.updateHospital();
   }
 
   /**
@@ -49,10 +55,11 @@ export class ObjetosComponent {
     const userToken = this.tokenService.getToken();
     this.userService.curarEnf1(userToken!).subscribe({
       next: (value: any) => {
-        this.curas = value[0];
+        window.alert(JSON.stringify(value));
       },
       error: (error) => {
         console.error(error);
+        window.alert(JSON.stringify(error));
       },
     });
   }
@@ -60,10 +67,11 @@ export class ObjetosComponent {
     const userToken = this.tokenService.getToken();
     this.userService.curarEnf2(userToken!).subscribe({
       next: (value: any) => {
-        this.curas = value[0];
+        window.alert(JSON.stringify(value));
       },
       error: (error) => {
         console.error(error);
+        window.alert(JSON.stringify(error));
       },
     });
   }
@@ -71,10 +79,29 @@ export class ObjetosComponent {
     const userToken = this.tokenService.getToken();
     this.userService.curarEnf3(userToken!).subscribe({
       next: (value: any) => {
-        this.curas = value[0];
+        console.log(value);
+        window.alert(JSON.stringify(value));
       },
       error: (error) => {
         console.error(error);
+        window.alert(JSON.stringify(error));
+      },
+    });
+  }
+
+  /**
+   * Nombre: updateHospital
+   * Función: obtener todos los Xuxemons del usuario que estan enfermos
+   */
+  updateHospital() {
+    const userToken = this.tokenService.getToken();
+    this.userService.getAllHospital(userToken!).subscribe({
+      next: (value: any) => {
+        this.hospitalizados = value.xuxemonsEnfermos;
+        this.enfermedad = this.hospitalizados[0].enfermedad_nombre;
+      },
+      error: (error) => {
+        console.error('Error fetching hospitalizados:', error);
       },
     });
   }
@@ -84,15 +111,21 @@ export class ObjetosComponent {
    * Función: consigue las categorias existentes para hacer el filtro
    */
   conseguirCategorias(): string[] {
-    const categorias = this.curas.map(value => value.categoria);
-    return categorias.filter((value: string, idx: number) => categorias.indexOf(value) == idx);
+    const categorias = this.curas.map((value) => value.categoria);
+    return categorias.filter(
+      (value: string, idx: number) => categorias.indexOf(value) == idx
+    );
   }
   /**
-     * Nombre: obtenerItemsPorCategoria
-     * Función: obtiene las categorias de los items para poder hacer el filtraje con estas
-     */
+   * Nombre: obtenerItemsPorCategoria
+   * Función: obtiene las categorias de los items para poder hacer el filtraje con estas
+   */
   obtenerItemsPorCategoria(): Curas[] {
-    return this.curas.filter(value => (value.categoria.toLowerCase()).indexOf(this.categoria.toLowerCase()) != -1);
+    return this.curas.filter(
+      (value) =>
+        value.categoria.toLowerCase().indexOf(this.categoria.toLowerCase()) !=
+        -1
+    );
   }
   /**
    * Nombre: getCurrentPagItems
@@ -131,15 +164,22 @@ export class ObjetosComponent {
     const dinero = '3px solid rgb(245, 94, 7)';
     const otros = '3px solid rgb(2, 254, 212)';
 
-
     switch (categoria) {
-      case 'curacion': border = curas; break;
-      case 'dinero': border = dinero; break;
-      case 'otros': border = otros; break;
-      default: border = '3px solid black'; break;
+      case 'curacion':
+        border = curas;
+        break;
+      case 'dinero':
+        border = dinero;
+        break;
+      case 'otros':
+        border = otros;
+        break;
+      default:
+        border = '3px solid black';
+        break;
     }
     return {
-      'border': border,
+      border: border,
     };
   }
 }

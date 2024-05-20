@@ -446,9 +446,14 @@ class XuxemonsUserController extends Controller
         try {
             DB::beginTransaction();
 
-            DB::table('xuxemons_user')
-                ->where('user_id', $user->id)
-                ->update(['enfermo' => false]);
+            DB::statement("
+            UPDATE xuxemons_users
+            INNER JOIN xuxemons_users_enfermedades
+            ON xuxemons_users.id = xuxemons_users_enfermedades.xuxemon_user_id
+            SET xuxemons_users.enfermo = false
+            WHERE xuxemons_users.user_id = ?
+            AND xuxemons_users_enfermedades.enfermedad_id = ?
+        ", [$user->id, 1]);
 
             // Eliminar los registros de la tabla xuxemon_user_enfermedad
             DB::table('xuxemons_users_enfermedades')
@@ -479,9 +484,14 @@ class XuxemonsUserController extends Controller
         try {
             DB::beginTransaction();
 
-            DB::table('xuxemons_user')
-                ->where('user_id', $user->id)
-                ->update(['enfermo' => false]);
+            DB::statement("
+                UPDATE xuxemons_users
+                INNER JOIN xuxemons_users_enfermedades
+                ON xuxemons_users.id = xuxemons_users_enfermedades.xuxemon_user_id
+                SET xuxemons_users.enfermo = false
+                WHERE xuxemons_users.user_id = ?
+                AND xuxemons_users_enfermedades.enfermedad_id = ?
+            ", [$user->id, 2]);
 
             // Eliminar los registros de la tabla xuxemon_user_enfermedad
             DB::table('xuxemons_users_enfermedades')
@@ -512,13 +522,19 @@ class XuxemonsUserController extends Controller
         try {
             DB::beginTransaction();
 
-            DB::table('xuxemons_user')
-                ->where('user_id', $user->id)
-                ->update(['enfermo' => false]);
+            DB::statement("
+                UPDATE xuxemons_users
+                INNER JOIN xuxemons_users_enfermedades
+                ON xuxemons_users.id = xuxemons_users_enfermedades.xuxemon_user_id
+                SET xuxemons_users.enfermo = false
+                WHERE xuxemons_users.user_id = ?
+                AND xuxemons_users_enfermedades.enfermedad_id = ?
+            ", [$user->id, 3]);
+
 
             // Eliminar los registros de la tabla xuxemon_user_enfermedad
             DB::table('xuxemons_users_enfermedades')
-                ->where('enfermedad_id', 2)
+                ->where('enfermedad_id', 3)
                 ->where('xuxemon_user_id', $user->id)
                 ->delete();
 
@@ -532,5 +548,4 @@ class XuxemonsUserController extends Controller
             return response()->json(['error' => 'Ocurrió un error al actualizar los registros: ' . $e->getMessage()], 500);
         }
     }
-
 }

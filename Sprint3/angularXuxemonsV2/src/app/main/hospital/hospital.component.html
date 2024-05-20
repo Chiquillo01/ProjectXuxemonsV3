@@ -16,9 +16,9 @@
                     [ngStyle]="getImageStyle(cardUser.tamano)">
             </div>
 
-            <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'pequeno'">Tamaño: Pequeño</h4>
-            <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'mediano'">Tamaño: Mediano</h4>
-            <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'grande'">Tamaño: Grande</h4>
+            <h4 class="tamaniosStyle" *ngIf="cardUser.enfermedad_nombre == 'Bajon de azucar'">Enf: Bajon de azucar</h4>
+            <h4 class="tamaniosStyle" *ngIf="cardUser.enfermedad_nombre == 'Sobredosis de azucar'">Enf: Sobredosis de azucar</h4>
+            <h4 class="tamaniosStyle" *ngIf="cardUser.enfermedad_nombre == 'Atracon'">Enf: Atracon</h4>
 
             <div>
                 <button class="btn curar-btn" (click)="curar()">

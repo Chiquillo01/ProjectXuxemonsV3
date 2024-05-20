@@ -3,4 +3,5 @@ export interface Hospital {
   tamano: string;
   tipo: string;
   archivo: string;
+  enfermedad_nombre: string;
 }

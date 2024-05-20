@@ -28,19 +28,19 @@
                     <img [src]="'../assets/home/objetos/' + card.archivo" [attr.alt]="card.nombre">
                 </div>
 
-                <div *ngIf="card.nombre === 'Bajon de azucar'">
+                <div *ngIf="enfermedad === 'Bajon de azucar' && card.nombre === 'Xocolatina'">
                     <button class="btn curar-btn" (click)="E1Curar()">
                         Curar Bajon de azucar
                     </button>
                 </div>
 
-                <div *ngIf="card.nombre  === 'Sobredosis de azucar'">
+                <div *ngIf="enfermedad  === 'Sobredosis de azucar' && card.nombre === 'Inxulina'">
                     <button class="btn curar-btn" (click)="E2Curar()">
                         Curar Sobredosis de azucar
                     </button>
                 </div>
 
-                <div *ngIf="card.nombre  === 'Atracon'">
+                <div *ngIf="enfermedad  === 'Atracon' && card.nombre === 'Xal de frutas'">
                     <button class="btn curar-btn" (click)="E3Curar()">
                         Curar Atracon
                     </button>

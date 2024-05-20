@@ -159,13 +159,17 @@ class Controller extends BaseController
                 ->where('xuxemons_users.user_id', $user->id)
                 ->where('xuxemons_users.enfermo', true)
                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->join('xuxemons_users_enfermedades', 'xuxemons_users.id', '=', 'xuxemons_users_enfermedades.xuxemon_user_id')
+                ->join('enfermedades', 'xuxemons_users_enfermedades.enfermedad_id', '=', 'enfermedades.id')
                 ->select(
                     'xuxemons_users.*',
                     'xuxemons.nombre',
                     'xuxemons.tipo',
                     'xuxemons.archivo',
+                    'enfermedades.nombre as enfermedad_nombre'
                 )
                 ->get();
+
 
             if ($xuxemonsEnfermos->isEmpty()) {
                 return response()->json(['message' => 'No hay Xuxemons enfermos'], 200);
