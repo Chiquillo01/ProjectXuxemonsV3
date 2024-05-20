@@ -147,7 +147,7 @@ class Controller extends BaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function hospital(Request $request, $userToken)
+    public function hospital($userToken)
     {
         try {
             $user = User::where('remember_token', $userToken)->first();
@@ -155,13 +155,15 @@ class Controller extends BaseController
                 return response()->json(['message' => 'Usuario no encontrado'], 404);
             }
 
-            $xuxemonsEnfermos = XuxemonsUser::where('user_id', $user->id)
-                ->where('enfermo', true)
+            $xuxemonsEnfermos = DB::table('xuxemons_users')
+                ->where('xuxemons_users.user_id', $user->id)
+                ->where('xuxemons_users.enfermo', true)
                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
                 ->select(
                     'xuxemons_users.*',
                     'xuxemons.nombre',
                     'xuxemons.tipo',
+                    'xuxemons.archivo',
                 )
                 ->get();
 

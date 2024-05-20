@@ -7,7 +7,7 @@
                 </h3>
             </div>
 
-            <h4 class="card-title"  [ngStyle]="getTipeStyle(cardUser.tipo)">
+            <h4 class="card-title" [ngStyle]="getTipeStyle(cardUser.tipo)">
                 {{cardUser.tipo}}
             </h4>
 
@@ -15,6 +15,10 @@
                 <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
                     [ngStyle]="getImageStyle(cardUser.tamano)">
             </div>
+
+            <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'pequeno'">Tamaño: Pequeño</h4>
+            <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'mediano'">Tamaño: Mediano</h4>
+            <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'grande'">Tamaño: Grande</h4>
 
             <div>
                 <button class="btn curar-btn" (click)="curar()">

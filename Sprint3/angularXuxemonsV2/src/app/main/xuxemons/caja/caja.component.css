@@ -82,6 +82,11 @@
     padding: 10px;
     margin-right: 30px;
     text-decoration: none;
+    border-bottom: 2px solid #E7E4F1;
+}
+
+.generarB:hover {
+    border-bottom: 2px solid #ffff;
 }
 
 .list-container {
@@ -112,6 +117,11 @@
 .card-header {
     display: flex;
     justify-content: space-evenly;
+}
+
+.tamaniosStyle {
+    font-size: 16px;
+    color: black;
 }
 
 .button_upload {
@@ -147,7 +157,7 @@
     height: auto;
 }
 
-.btn-equipo{
+.btn-equipo {
     color: black;
     background: none;
     border: none;

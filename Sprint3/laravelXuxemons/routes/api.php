@@ -38,6 +38,8 @@ Route::put('/xuxemons/alimentar/user', [XuxemonsUserController::class, 'alimenta
 // ---------------------- //
 
 // Rutas para el inventario / hospital // 
+Route::get('/inventario', [Controller::class, 'inventario']);
+Route::get('/hospital/{userToken}', [Controller::class, 'hospital']);
 Route::get('/xuxemons/curarEnv1', [XuxemonsUserController::class, 'curarEnv1']);
 Route::get('/xuxemons/curarEnv2', [XuxemonsUserController::class, 'curarEnv2']);
 Route::get('/xuxemons/curarEnv3', [XuxemonsUserController::class, 'curarEnv3']);
@@ -58,12 +60,6 @@ Route::post('/login', [Controller::class, 'login']);
 Route::get('/usuario/{userToken}', [Controller::class, 'showUser']);
 // Route::put('/updateUsuario/{id}', [Controller::class, 'update']);
 // Route::post('/subirImagen', [Controller::class, 'uploadImage']);
-// ---------------------- //
-// ---------------------- //
-
-// Rutas para el inventario / hospital // 
-Route::get('/inventario', [Controller::class, 'inventario']);
-Route::get('/hospital/{userToken}', [Controller::class, 'hospital']);
 // ---------------------- //
 // ---------------------- //
 

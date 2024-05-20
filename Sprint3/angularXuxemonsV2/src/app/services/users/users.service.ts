@@ -88,7 +88,7 @@ export class UsersService {
    */
   getAllHospital(userToken: string): Observable<Hospital[]> {
     return this.http.get<Hospital[]>(
-      `http://127.0.0.1:8000/api/xuxemonsUser/${userToken}`
+      `http://127.0.0.1:8000/api/hospital/${userToken}`
     );
   }
 

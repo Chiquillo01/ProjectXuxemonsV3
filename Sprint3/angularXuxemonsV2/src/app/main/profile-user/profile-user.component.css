@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     margin: 30px 0;
     /* background: red; */
@@ -6,7 +6,36 @@
     min-width: 100%;
 }
 
-.info{
+.imagen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.botonesImg {
+    margin: 50px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.crearB {
+    border-bottom: 2px solid #E7E4F1;
+    color: black;
+    padding: 10px;
+    margin-top: 0.5em;
+    margin-right: 30px;
+    margin-bottom: 0.5em;
+    text-decoration: none;
+}
+
+.crearB:hover {
+    border-bottom: 2px solid #ffff;
+    cursor: pointer;
+}
+
+.info {
     gap: 40px;
     display: flex;
     flex-direction: column;
@@ -16,44 +45,17 @@
     width: 100%;
 }
 
-.inputText{
+.inputText {
     width: 78%;
 }
 
-img{
+img {
     width: 50%;
-    border: 10px solid black;
+    border: 5px solid rgb(255, 255, 255);
     border-radius: 50%;
 }
 
-.imagen{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.botonesImg{
-    margin: 50px;
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-a{
-    margin-top: 20px;
-    display: flex;
-    text-decoration: none;
-    min-width: 200px;
-    min-height: 50px;
-    justify-content: space-around;
-    align-items: center;
-    cursor: pointer;
-    border: 4px solid pink;
-    border-radius: 20px;
-}
-
-.descripcion{
+.descripcion {
     display: flex;
     flex-direction: column;
     background: skyblue;
@@ -62,18 +64,18 @@ a{
     align-items: baseline;
 }
 
-.descripcionInput{
+.descripcionInput {
     min-height: 100%;
     min-width: 100%;
 }
 
-.butGuardar{
+.butGuardar {
     display: flex;
     margin: 30px;
     justify-content: space-around;
 }
 
-.minInfo{
+.minInfo {
     display: flex;
     flex-direction: row;
     background: skyblue;

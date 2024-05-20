@@ -18,7 +18,11 @@
                         [ngStyle]="getImageStyle(cardUser.tamano)">
                 </div>
 
-                <img *ngIf="cardUser.enfermedad_id !== 1" class="button_upload"
+                <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'pequeno'">Tamaño: Pequeño</h4>
+                <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'mediano'">Tamaño: Mediano</h4>
+                <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'grande'">Tamaño: Grande</h4>
+
+                <img *ngIf="cardUser.enfermedad_id !== 2" class="button_upload"
                     src="../../../../assets/xuxemons/iconos/download1.png" alt=""
                     onmouseover="this.src='../../../../assets/xuxemons/iconos/download.gif';"
                     onmouseout="this.src='../../../assets/xuxemons/iconos/download1.png'" (click)="activo(cardUser)">
@@ -32,15 +36,9 @@
                     </div>
                 </div>
 
-                <div class="card-header" *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 1">
-                </div>
+                <div class="card-header" *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 1"></div>
+                <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3"></div>
 
-                <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3">
-
-                    <button class="btn eliminar-btn" (click)="eliminar(cardUser.xuxemon_id)">
-                        Liberar
-                    </button>
-                </div>
             </div>
         </div>
         <div class="first-section">
@@ -100,9 +98,9 @@
                 </div>
 
                 <a>
-                    <h4  class="card-title" *ngIf="cardUser.tamano == 'pequeno'">Tamaño: Pequeño</h4>
-                    <h4  class="card-title" *ngIf="cardUser.tamano == 'mediano'">Tamaño: Mediano</h4>
-                    <h4  class="card-title" *ngIf="cardUser.tamano == 'grande'">Tamaño: Grande</h4>
+                    <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'pequeno'">Tamaño: Pequeño</h4>
+                    <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'mediano'">Tamaño: Mediano</h4>
+                    <h4 class="tamaniosStyle" *ngIf="cardUser.tamano == 'grande'">Tamaño: Grande</h4>
                     <img class="button_upload" src="../../../../assets/xuxemons/iconos/upload1.png" alt=""
                         onmouseover="this.src='../../../../assets/xuxemons/iconos/upload.gif';"
                         onmouseout="this.src='../../../assets/xuxemons/iconos/upload1.png'" (click)="activo(cardUser)">
@@ -121,7 +119,8 @@
                     </div>
 
                     <!-- alternativa si esta enfermo -->
-                    <div *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3">
+                    <div
+                        *ngIf="cardUser.enfermo && cardUser.enfermedad_id === 3 || cardUser.enfermo && cardUser.enfermedad_id === 2">
                         <button class="btn alimentar-btn" (click)="hospital()">
                             Hospital
                         </button>

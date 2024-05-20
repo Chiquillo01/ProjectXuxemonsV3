@@ -57,7 +57,7 @@ export class EditarComponent {
       .XuxeUpdate(this.xuxemonForm.value, this.xuxeData.id)
       .subscribe({
         next: () => {
-          alert('Xuxemon modificado con exito.');
+          //alert('Xuxemon modificado con exito.');
           this.router.navigate(['/xuxedex']);
         },
         error: (error) => {
