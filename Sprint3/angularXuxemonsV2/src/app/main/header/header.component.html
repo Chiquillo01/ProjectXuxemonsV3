@@ -17,10 +17,12 @@
                             alt="error config"></a>
                 </span>
                 <!-- //////////////////////////////////////// -->
-                <a  routerLink="/profile-user">
-                    <img class="button_slide" alt="Logo" onmouseout="this.src='../../../assets/home/header/user.png'"
+                <a  routerLink="/profile-user" *ngFor="let user of users">
+                    <img  *ngIf="!user.imagen" class="button_slide" alt="Logo" onmouseout="this.src='../../../assets/home/header/user.png'"
                         onmouseover="this.src='../../../assets/home/header/user1.png';"
                         src="../../../assets/home/header/user1.png">
+                    
+                    <img *ngIf="user.imagen" class="button_slide"  alt="Logo" src={{user.imagen}}>
                 </a>
             </span>
         </div>
